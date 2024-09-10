@@ -1,0 +1,6 @@
+[console_scripts]
+control = px4_offboard.control:main
+offboard_control = px4_offboard.offboard_control:main
+processes = px4_offboard.processes:main
+velocity_control = px4_offboard.velocity_control:main
+visualizer = px4_offboard.visualizer:main

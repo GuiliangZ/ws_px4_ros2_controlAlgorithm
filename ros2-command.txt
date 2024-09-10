@@ -1,0 +1,37 @@
+source /opt/ros/humble/setup.bash
+source install/local_setup.bash
+make px4_sitl gz_x500
+sudo MicroXRCEAgent serial --dev /dev/ttyAMA0 -b 921600
+sudo MicroXRCEAgent serial --dev /dev/ttyUSB0 -b 921600
+MicroXRCEAgent udp4 -p 8888
+ssh rainlab-pi4@192.168.0.76
+
+git clone https://github.com/PX4/px4_msgs.git
+git clone https://github.com/PX4/px4_ros_com.git
+colcon build --packages-select px4_ros_com
+colcon build --packages-select px4_offboard_position
+ros2 run px4_offboard_position px4_offboard_position
+ros2 run px4_ros_com offboard_control
+
+
+##low-level packages
+colcon build --packages-select px4_offboard_lowlevel  	 	
+ros2 run px4_offboard_lowlevel circle_trajectory_node
+
+##velocity packages
+colcon build --packages-select px4_offboard	
+source install/local_setup.bash		
+ros2 launch px4_offboard offboard_velocity_control.launch.py
+ros2 run px4_offboard position_velocity
+
+ros2 launch px4_ros_com sensor_combined_listener.launch.py
+
+ros2 topic echo /fmu/in/vehicle_visual_odometry
+ros2 topic echo /fmu/out/vehicle_local_position
+
+uxrce_dds_client status
+
+#setup raspberry pi default command when rebooting
+sudo crontab -e
+@reboot xxxx
+
