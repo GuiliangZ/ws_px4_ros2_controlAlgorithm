@@ -1,0 +1,181 @@
+[0.006s] Invoking command in '/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_ros_com': AMENT_PREFIX_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/src/px4_ros_com -DCMAKE_INSTALL_PREFIX=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com
+[0.051s] -- The C compiler identification is GNU 11.4.0
+[0.103s] -- The CXX compiler identification is GNU 11.4.0
+[0.109s] -- Detecting C compiler ABI info
+[0.159s] -- Detecting C compiler ABI info - done
+[0.165s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.165s] -- Detecting C compile features
+[0.165s] -- Detecting C compile features - done
+[0.168s] -- Detecting CXX compiler ABI info
+[0.223s] -- Detecting CXX compiler ABI info - done
+[0.230s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.231s] -- Detecting CXX compile features
+[0.231s] -- Detecting CXX compile features - done
+[0.234s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.511s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.577s] -- Found builtin_interfaces: 1.2.1 (/opt/ros/humble/share/builtin_interfaces/cmake)
+[0.603s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.607s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.613s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.622s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.634s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.647s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[0.660s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[0.662s] -- Found geometry_msgs: 4.2.4 (/opt/ros/humble/share/geometry_msgs/cmake)
+[0.693s] -- Found px4_msgs: 2.0.1 (/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs/share/px4_msgs/cmake)
+[0.705s] -- Found rclcpp: 16.0.10 (/opt/ros/humble/share/rclcpp/cmake)
+[0.755s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.758s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.834s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[0.862s] -- Found FastRTPS: /opt/ros/humble/include  
+[0.900s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.912s] -- Looking for pthread.h
+[0.963s] -- Looking for pthread.h - found
+[0.963s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.012s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[1.013s] -- Found Threads: TRUE  
+[1.063s] -- Found sensor_msgs: 4.2.4 (/opt/ros/humble/share/sensor_msgs/cmake)
+[1.083s] -- Found rclpy: 3.3.14 (/opt/ros/humble/share/rclpy/cmake)
+[1.090s] -- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.173s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.177s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.177s] -- Configured cppcheck include dirs: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/src/px4_ros_com/include;$<BUILD_INTERFACE:/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/src/px4_ros_com/include/px4_ros_com>
+[1.177s] -- Configured cppcheck exclude dirs and/or files: 
+[1.180s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[1.180s] -- Configured cpplint exclude dirs and/or files: 
+[1.181s] -- Added test 'flake8' to check Python code syntax and style conventions
+[1.183s] -- Added test 'lint_cmake' to check CMake code style
+[1.183s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[1.187s] -- Added test 'uncrustify' to check C / C++ code style
+[1.187s] -- Configured uncrustify additional arguments: 
+[1.187s] -- Added test 'xmllint' to check XML markup files
+[1.189s] -- Configuring done
+[1.209s] -- Generating done
+[1.210s] -- Build files have been written to: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_ros_com
+[1.219s] Invoked command in '/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_ros_com' returned '0': AMENT_PREFIX_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/src/px4_ros_com -DCMAKE_INSTALL_PREFIX=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com
+[1.219s] Invoking command in '/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_ros_com': AMENT_PREFIX_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_ros_com -- -j4 -l4
+[1.253s] [  8%] [32mBuilding CXX object CMakeFiles/vehicle_gps_position_listener.dir/src/examples/listeners/vehicle_gps_position_listener.cpp.o[0m
+[1.253s] [ 16%] [32mBuilding CXX object CMakeFiles/frame_transforms.dir/src/lib/frame_transforms.cpp.o[0m
+[1.253s] [ 25%] [32mBuilding CXX object CMakeFiles/sensor_combined_listener.dir/src/examples/listeners/sensor_combined_listener.cpp.o[0m
+[1.258s] [ 33%] [32mBuilding CXX object CMakeFiles/debug_vect_advertiser.dir/src/examples/advertisers/debug_vect_advertiser.cpp.o[0m
+[2.365s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:214[m[K,
+[2.365s]                  from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+[2.365s]                  from [01m[K/usr/include/eigen3/Eigen/Eigen:1[m[K,
+[2.365s]                  from [01m[K/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/src/px4_ros_com/include/px4_ros_com/frame_transforms.h:45[m[K,
+[2.365s]                  from [01m[K/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/src/px4_ros_com/src/lib/frame_transforms.cpp:41[m[K:
+[2.365s] [01m[K/usr/include/eigen3/Eigen/src/Core/arch/NEON/PacketMath.h:[m[K In function ‘[01m[KPacket Eigen::internal::pload(const typename Eigen::internal::unpacket_traits<T>::type*) [with Packet = Eigen::internal::eigen_packet_wrapper<int, 2>; typename Eigen::internal::unpacket_traits<T>::type = signed char][m[K’:
+[2.365s] [01m[K/usr/include/eigen3/Eigen/src/Core/arch/NEON/PacketMath.h:1671:9:[m[K [01;35m[Kwarning: [m[K‘[01m[Kvoid* memcpy(void*, const void*, size_t)[m[K’ copying an object of non-trivial type ‘[01m[KEigen::internal::Packet4c[m[K’ {aka ‘[01m[Kstruct Eigen::internal::eigen_packet_wrapper<int, 2>[m[K’} from an array of ‘[01m[Kconst int8_t[m[K’ {aka ‘[01m[Kconst signed char[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wclass-memaccess-Wclass-memaccess]8;;[m[K]
+[2.365s]  1671 |   [01;35m[Kmemcpy(&res, from, sizeof(Packet4c))[m[K;
+[2.365s]       |   [01;35m[K~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[2.366s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:172[m[K,
+[2.366s]                  from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+[2.366s]                  from [01m[K/usr/include/eigen3/Eigen/Eigen:1[m[K,
+[2.366s]                  from [01m[K/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/src/px4_ros_com/include/px4_ros_com/frame_transforms.h:45[m[K,
+[2.366s]                  from [01m[K/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/src/px4_ros_com/src/lib/frame_transforms.cpp:41[m[K:
+[2.366s] [01m[K/usr/include/eigen3/Eigen/src/Core/GenericPacketMath.h:159:8:[m[K [01;36m[Knote: [m[K‘[01m[KEigen::internal::Packet4c[m[K’ {aka ‘[01m[Kstruct Eigen::internal::eigen_packet_wrapper<int, 2>[m[K’} declared here
+[2.366s]   159 | struct [01;36m[Keigen_packet_wrapper[m[K
+[2.366s]       |        [01;36m[K^~~~~~~~~~~~~~~~~~~~[m[K
+[2.376s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:214[m[K,
+[2.376s]                  from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+[2.376s]                  from [01m[K/usr/include/eigen3/Eigen/Eigen:1[m[K,
+[2.377s]                  from [01m[K/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/src/px4_ros_com/include/px4_ros_com/frame_transforms.h:45[m[K,
+[2.377s]                  from [01m[K/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/src/px4_ros_com/src/lib/frame_transforms.cpp:41[m[K:
+[2.377s] [01m[K/usr/include/eigen3/Eigen/src/Core/arch/NEON/PacketMath.h:[m[K In function ‘[01m[KPacket Eigen::internal::ploadu(const typename Eigen::internal::unpacket_traits<T>::type*) [with Packet = Eigen::internal::eigen_packet_wrapper<int, 2>; typename Eigen::internal::unpacket_traits<T>::type = signed char][m[K’:
+[2.377s] [01m[K/usr/include/eigen3/Eigen/src/Core/arch/NEON/PacketMath.h:1716:9:[m[K [01;35m[Kwarning: [m[K‘[01m[Kvoid* memcpy(void*, const void*, size_t)[m[K’ copying an object of non-trivial type ‘[01m[KEigen::internal::Packet4c[m[K’ {aka ‘[01m[Kstruct Eigen::internal::eigen_packet_wrapper<int, 2>[m[K’} from an array of ‘[01m[Kconst int8_t[m[K’ {aka ‘[01m[Kconst signed char[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wclass-memaccess-Wclass-memaccess]8;;[m[K]
+[2.377s]  1716 |   [01;35m[Kmemcpy(&res, from, sizeof(Packet4c))[m[K;
+[2.377s]       |   [01;35m[K~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[2.377s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:172[m[K,
+[2.377s]                  from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+[2.377s]                  from [01m[K/usr/include/eigen3/Eigen/Eigen:1[m[K,
+[2.377s]                  from [01m[K/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/src/px4_ros_com/include/px4_ros_com/frame_transforms.h:45[m[K,
+[2.377s]                  from [01m[K/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/src/px4_ros_com/src/lib/frame_transforms.cpp:41[m[K:
+[2.377s] [01m[K/usr/include/eigen3/Eigen/src/Core/GenericPacketMath.h:159:8:[m[K [01;36m[Knote: [m[K‘[01m[KEigen::internal::Packet4c[m[K’ {aka ‘[01m[Kstruct Eigen::internal::eigen_packet_wrapper<int, 2>[m[K’} declared here
+[2.377s]   159 | struct [01;36m[Keigen_packet_wrapper[m[K
+[2.377s]       |        [01;36m[K^~~~~~~~~~~~~~~~~~~~[m[K
+[11.836s] [ 41%] [32m[1mLinking CXX executable debug_vect_advertiser[0m
+[12.694s] [ 41%] Built target debug_vect_advertiser
+[12.773s] [ 50%] [32mBuilding CXX object CMakeFiles/offboard_control.dir/src/examples/offboard/offboard_control.cpp.o[0m
+[16.198s] [ 58%] [32m[1mLinking CXX shared library libframe_transforms.so[0m
+[16.700s] [ 58%] Built target frame_transforms
+[16.757s] [ 66%] [32mBuilding CXX object CMakeFiles/offboard_control_srv.dir/src/examples/offboard/offboard_control_srv.cpp.o[0m
+[17.770s] [ 75%] [32m[1mLinking CXX executable sensor_combined_listener[0m
+[17.891s] [ 83%] [32m[1mLinking CXX executable vehicle_gps_position_listener[0m
+[18.409s] [ 83%] Built target vehicle_gps_position_listener
+[18.560s] [ 83%] Built target sensor_combined_listener
+[20.061s] [ 91%] [32m[1mLinking CXX executable offboard_control[0m
+[20.319s] [ 91%] Built target offboard_control
+[22.510s] [100%] [32m[1mLinking CXX executable offboard_control_srv[0m
+[22.701s] [100%] Built target offboard_control_srv
+[22.720s] [100%] Built target ament_cmake_python_copy_px4_ros_com
+[23.120s] running egg_info
+[23.120s] creating px4_ros_com.egg-info
+[23.129s] writing px4_ros_com.egg-info/PKG-INFO
+[23.129s] writing dependency_links to px4_ros_com.egg-info/dependency_links.txt
+[23.130s] writing top-level names to px4_ros_com.egg-info/top_level.txt
+[23.130s] writing manifest file 'px4_ros_com.egg-info/SOURCES.txt'
+[23.156s] reading manifest file 'px4_ros_com.egg-info/SOURCES.txt'
+[23.156s] writing manifest file 'px4_ros_com.egg-info/SOURCES.txt'
+[23.180s] [100%] Built target ament_cmake_python_build_px4_ros_com_egg
+[23.323s] Invoked command in '/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_ros_com' returned '0': AMENT_PREFIX_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_ros_com -- -j4 -l4
+[23.416s] Invoking command in '/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_ros_com': AMENT_PREFIX_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_ros_com
+[23.422s] -- Install configuration: ""
+[23.423s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/lib/px4_ros_com/sensor_combined_listener
+[23.430s] -- Set runtime path of "/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/lib/px4_ros_com/sensor_combined_listener" to ""
+[23.430s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/lib/px4_ros_com/vehicle_gps_position_listener
+[23.434s] -- Set runtime path of "/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/lib/px4_ros_com/vehicle_gps_position_listener" to ""
+[23.435s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/lib/px4_ros_com/debug_vect_advertiser
+[23.438s] -- Set runtime path of "/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/lib/px4_ros_com/debug_vect_advertiser" to ""
+[23.438s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/lib/px4_ros_com/offboard_control
+[23.440s] -- Set runtime path of "/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/lib/px4_ros_com/offboard_control" to ""
+[23.440s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/lib/px4_ros_com/offboard_control_srv
+[23.441s] -- Set runtime path of "/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/lib/px4_ros_com/offboard_control_srv" to ""
+[23.442s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/environment/library_path.sh
+[23.443s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/environment/library_path.dsv
+[23.443s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/include/px4_ros_com
+[23.443s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/include/px4_ros_com/frame_transforms.h
+[23.444s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/lib/libframe_transforms.so
+[23.448s] -- Set runtime path of "/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/lib/libframe_transforms.so" to ""
+[23.448s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com//launch
+[23.448s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com//launch/sensor_combined_listener.launch.py
+[23.448s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com//launch/offboard_control_launch.yaml
+[23.448s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com//test
+[23.449s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com//test/__init__.py
+[23.449s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com//test/test_input.py
+[23.449s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com//test/pipeline_io_test.py
+[23.449s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com//test/test_output.py
+[23.450s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/environment/pythonpath.sh
+[23.450s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/environment/pythonpath.dsv
+[23.450s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/local/lib/python3.10/dist-packages/px4_ros_com-0.1.0-py3.10.egg-info
+[23.450s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/local/lib/python3.10/dist-packages/px4_ros_com-0.1.0-py3.10.egg-info/PKG-INFO
+[23.450s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/local/lib/python3.10/dist-packages/px4_ros_com-0.1.0-py3.10.egg-info/dependency_links.txt
+[23.451s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/local/lib/python3.10/dist-packages/px4_ros_com-0.1.0-py3.10.egg-info/top_level.txt
+[23.451s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/local/lib/python3.10/dist-packages/px4_ros_com-0.1.0-py3.10.egg-info/SOURCES.txt
+[23.451s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/local/lib/python3.10/dist-packages/px4_ros_com
+[23.451s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/local/lib/python3.10/dist-packages/px4_ros_com/__init__.py
+[23.451s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/local/lib/python3.10/dist-packages/px4_ros_com/module_to_import.py
+[23.477s] Listing '/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/local/lib/python3.10/dist-packages/px4_ros_com'...
+[23.477s] Compiling '/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/local/lib/python3.10/dist-packages/px4_ros_com/__init__.py'...
+[23.477s] Compiling '/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/local/lib/python3.10/dist-packages/px4_ros_com/module_to_import.py'...
+[23.481s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/lib/px4_ros_com/offboard_control.py
+[23.482s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/ament_index/resource_index/package_run_dependencies/px4_ros_com
+[23.483s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/ament_index/resource_index/parent_prefix_path/px4_ros_com
+[23.484s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/environment/ament_prefix_path.sh
+[23.484s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/environment/ament_prefix_path.dsv
+[23.484s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/environment/path.sh
+[23.485s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/environment/path.dsv
+[23.485s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/local_setup.bash
+[23.485s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/local_setup.sh
+[23.486s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/local_setup.zsh
+[23.486s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/local_setup.dsv
+[23.486s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/package.dsv
+[23.487s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/ament_index/resource_index/packages/px4_ros_com
+[23.488s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/cmake/export_frame_transformsExport.cmake
+[23.488s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/cmake/export_frame_transformsExport-noconfig.cmake
+[23.488s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/cmake/ament_cmake_export_dependencies-extras.cmake
+[23.489s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/cmake/ament_cmake_export_targets-extras.cmake
+[23.489s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/cmake/ament_cmake_export_include_directories-extras.cmake
+[23.490s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/cmake/ament_cmake_export_libraries-extras.cmake
+[23.490s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/cmake/px4_ros_comConfig.cmake
+[23.491s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/cmake/px4_ros_comConfig-version.cmake
+[23.491s] -- Installing: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_ros_com/share/px4_ros_com/package.xml
+[23.503s] Invoked command in '/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_ros_com' returned '0': AMENT_PREFIX_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_ros_com
