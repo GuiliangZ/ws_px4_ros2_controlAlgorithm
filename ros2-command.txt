@@ -35,3 +35,4 @@ uxrce_dds_client status
 sudo crontab -e
 @reboot xxxx
 
+flatpak run --device=all org.mavlink.qgroundcontrol
