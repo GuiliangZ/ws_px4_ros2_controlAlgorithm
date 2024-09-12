@@ -12,7 +12,9 @@ setup.py
 launch/offboard_velocity_control.launch.py
 px4_offboard/__init__.py
 px4_offboard/control.py
+px4_offboard/position_velocity_control.py
 px4_offboard/processes.py
+px4_offboard/temp.py
 px4_offboard/velocity_control.py
 px4_offboard/visualizer.py
 resource/px4_offboard

@@ -30,6 +30,7 @@ Right Arrow: Roll Right
 Press SPACE to arm/disarm the drone
 """
 
+#Twist -（roll right/left, pitch forward/backward, altitude up/down, yaw left/right)
 moveBindings = {
     'w': (0, 0, 1, 0), #Z+
     's': (0, 0, -1, 0),#Z-
