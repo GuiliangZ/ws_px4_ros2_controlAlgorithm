@@ -94,13 +94,15 @@ class PositionVelocityControl(Node):
         self.timer = self.create_timer(0.02, self.timer_callback)
 
         self.setpoints = Setpoint(
-            a=Point(0, 0, -5),
-            b=Point(3, -3, -5),
-            c=Point(-3, -3, -5),
-            d=Point(-3, 3, -5),
-            e=Point(3, 3, -5),
-            f=Point(3, -3, -5)
+            a=Point(0.0, 0.0, -5.0),
+            b=Point(3.0, -3.0, -5.0),
+            c=Point(-3.0, -3.0, -5.0),
+            d=Point(-3.0, 3.0, -5.0),
+            e=Point(3.0, 3.0, -5.0),
+            f=Point(3.0, -3.0, -5.0)
         )
+
+        self.target_position = Point(0.0,0.0,-5.0)
 
 
     """Drone action functions"""
@@ -199,7 +201,7 @@ class PositionVelocityControl(Node):
         self.get_logger().info(f"Publishing position setpoints {[x, y, z]}")
         self.get_logger().info(f"Local Position {[self.vehicle_local_position.x, self.vehicle_local_position.y, self.vehicle_local_position.z]}")
 
-    def velocity_position_controller(self, position):
+    def velocity_position_controller(self, target_position):
         velocity_yaw = Twist()
         #You can only control the angular rate at z direction - yaw. Thi is partial attitude control. 
         velocity_yaw.angular.x = 0.0
@@ -207,9 +209,9 @@ class PositionVelocityControl(Node):
         velocity_yaw.angular.z = 0.0
         
         #the desired velocity is under world frame
-        desired_vel_x = self.Kp * (self.setpoints.a.x - self.vehicle_local_position.x)
-        desired_vel_y = self.Kp * (self.setpoints.a.y - self.vehicle_local_position.y)
-        desired_vel_z = self.Kp * (self.setpoints.a.z - self.vehicle_local_position.z)
+        desired_vel_x = self.Kp * (target_position.x - self.vehicle_local_position.x)
+        desired_vel_y = self.Kp * (target_position.y - self.vehicle_local_position.y)
+        desired_vel_z = self.Kp * (target_position.z - self.vehicle_local_position.z)
         # print("des_X", desired_vel_x, " des_Y", desired_vel_y, " des_Z", desired_vel_z, " /")
 
         if abs(desired_vel_x) > self.velocity_limit:
@@ -229,7 +231,7 @@ class PositionVelocityControl(Node):
         print("Next /")
         return velocity_yaw
     
-    def publish_velocity_setpoint(self):
+    def publish_velocity_setpoint(self, target_position):
         msg = OffboardControlMode()
         msg.position = False
         msg.velocity = True
@@ -240,7 +242,7 @@ class PositionVelocityControl(Node):
         self.offboard_control_mode_publisher.publish(msg)
 
         velocity_setpoints = Twist()
-        velocity_setpoints = self.velocity_position_controller()
+        velocity_setpoints = self.velocity_position_controller(target_position)
         # Compute velocity in the world frame
         cos_yaw = np.cos(self.trueYaw)
         sin_yaw = np.sin(self.trueYaw)
@@ -270,7 +272,7 @@ class PositionVelocityControl(Node):
             abs(target_position.z - local_position.z) > 0.1:
                 self.get_logger().info(f"Moving to setpoint: x={target_position.x}, y={target_position.y}, z={target_position.z}")
                 self.get_logger().info(f"Local Position {[local_position.x, local_position.y, local_position.z]}")
-                self.publish_velocity_setpoint()
+                self.publish_velocity_setpoint(target_position)
                 self.get_logger().info(f"Next: Local Position {[local_position.x, local_position.y, local_position.z]}")
         else:
             self.get_logger().info(f"Achieved!! setpoint: x={target_position.x}, y={target_position.y}, z={target_position.z}")
@@ -284,14 +286,15 @@ class PositionVelocityControl(Node):
 
         if self.vehicle_local_position.z > self.takeoff_height and self.vehicle_status.nav_state == VehicleStatus.NAVIGATION_STATE_OFFBOARD and self.position_control_mode:
             self.publish_position_setpoint(0.0, 0.0, self.takeoff_height)
+        elif abs(self.vehicle_local_position.z - self.takeoff_height) < 0.1 and self.position_control_mode:
             self.position_control_mode = False
             print("Desired Height has reached")
             self.position_reached = True
-        else:
+        elif self.vehicle_status.nav_state == VehicleStatus.NAVIGATION_STATE_OFFBOARD and self.position_control_mode == False:
             if self.position_reached:
-                target_position = self.setpoints.pop_point(0)
+                self.target_position = self.setpoints.pop_point(0)
                 self.position_reached = False
-            self.position_setpoint_track(target_position, self.vehicle_local_position)
+            self.position_setpoint_track(self.target_position, self.vehicle_local_position)
             # self.land()
             # exit(0)
 
