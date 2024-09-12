@@ -132,7 +132,6 @@ class OffboardControl(Node):
     def arm_message_callback(self, msg):
         self.arm_message = msg.data
         self.get_logger().info(f"Arm Message: {self.arm_message}")
-        print("Armming message checked")
 
     #callback function that arms, takes off, and switches to offboard mode
     #implements a finite state machine
@@ -149,39 +148,36 @@ class OffboardControl(Node):
                     self.current_state = "IDLE"
                     self.get_logger().info(f"Arming, Flight Check Failed")
                 elif(self.arm_state == VehicleStatus.ARMING_STATE_ARMED and self.myCnt > 10):
-                    # self.current_state = "TAKEOFF"
-                    # self.get_logger().info(f"Arming, Takeoff")
-                    self.state_offboard()
-                    self.arm() #send arm command
+                    self.current_state = "TAKEOFF"
+                    self.get_logger().info(f"Arming, Takeoff")
+                self.arm() #send arm command
 
+            case "TAKEOFF":
+                if(not(self.flightCheck)):
+                    self.current_state = "IDLE"
+                    self.get_logger().info(f"Takeoff, Flight Check Failed")
+                elif(self.nav_state == VehicleStatus.NAVIGATION_STATE_AUTO_TAKEOFF):
+                    self.current_state = "LOITER"
+                    self.get_logger().info(f"Takeoff, Loiter")
+                self.arm() #send arm command
+                self.take_off() #send takeoff command
 
-            # case "TAKEOFF":
-            #     if(not(self.flightCheck)):
-            #         self.current_state = "IDLE"
-            #         self.get_logger().info(f"Takeoff, Flight Check Failed")
-            #     elif(self.nav_state == VehicleStatus.NAVIGATION_STATE_AUTO_TAKEOFF):
-            #         self.current_state = "LOITER"
-            #         self.get_logger().info(f"Takeoff, Loiter")
-            #     self.state_offboard()
-            #     self.arm() #send arm command
-            #     self.take_off() #send takeoff command
+            # waits in this state while taking off, and the 
+            # moment VehicleStatus switches to Loiter state it will switch to offboard
+            case "LOITER": 
+                if(not(self.flightCheck)):
+                    self.current_state = "IDLE"
+                    self.get_logger().info(f"Loiter, Flight Check Failed")
+                elif(self.nav_state == VehicleStatus.NAVIGATION_STATE_AUTO_LOITER):
+                    self.current_state = "OFFBOARD"
+                    self.get_logger().info(f"Loiter, Offboard")
+                self.arm()
 
-            # # waits in this state while taking off, and the 
-            # # moment VehicleStatus switches to Loiter state it will switch to offboard
-            # case "LOITER": 
-            #     if(not(self.flightCheck)):
-            #         self.current_state = "IDLE"
-            #         self.get_logger().info(f"Loiter, Flight Check Failed")
-            #     elif(self.nav_state == VehicleStatus.NAVIGATION_STATE_AUTO_LOITER):
-            #         self.current_state = "OFFBOARD"
-            #         self.get_logger().info(f"Loiter, Offboard")
-            #     self.arm()
-
-            # case "OFFBOARD":
-            #     if(not(self.flightCheck) or self.arm_state != VehicleStatus.ARMING_STATE_ARMED or self.failsafe == True):
-            #         self.current_state = "IDLE"
-            #         self.get_logger().info(f"Offboard, Flight Check Failed")
-            #     self.state_offboard()
+            case "OFFBOARD":
+                if(not(self.flightCheck) or self.arm_state != VehicleStatus.ARMING_STATE_ARMED or self.failsafe == True):
+                    self.current_state = "IDLE"
+                    self.get_logger().info(f"Offboard, Flight Check Failed")
+                self.state_offboard()
 
         if(self.arm_state != VehicleStatus.ARMING_STATE_ARMED):
             self.arm_message = False
@@ -209,12 +205,9 @@ class OffboardControl(Node):
         self.myCnt = 0
         self.get_logger().info("Loiter Status")
 
-#uint16 VEHICLE_CMD_DO_SET_MODE = 176			# Set system mode. |Mode, as defined by ENUM MAV_MODE| Empty| Empty| Empty| Empty| Empty| Empty|
-#Use ChatGPT to find out the definition of ENUM MAV_MODE - 6 means System is in offboard mode but disarmed.
-#MAV_MODE_OFFBOARD_ARMED (22): System is in offboard mode and armed, where commands are received from an external source.
     def state_offboard(self):
         self.myCnt = 0
-        self.publish_vehicle_command(VehicleCommand.VEHICLE_CMD_DO_SET_MODE, 1., 6.) 
+        self.publish_vehicle_command(VehicleCommand.VEHICLE_CMD_DO_SET_MODE, 1., 6.)
         self.offboardMode = True
 
 
@@ -223,7 +216,6 @@ class OffboardControl(Node):
         
 
     # Arms the vehicle
-    #uint16 VEHICLE_CMD_COMPONENT_ARM_DISARM = 400		# Arms / Disarms a component |1 to arm, 0 to disarm
     def arm(self):
         self.publish_vehicle_command(VehicleCommand.VEHICLE_CMD_COMPONENT_ARM_DISARM, 1.0)
         self.get_logger().info("Arm command send")
@@ -234,9 +226,7 @@ class OffboardControl(Node):
         self.get_logger().info("Takeoff command send")
 
     #publishes command to /fmu/in/vehicle_command
-    #uint16 VEHICLE_CMD_NAV_TAKEOFF = 22			# 1-Takeoff from ground / hand |Minimum pitch (if airspeed sensor present), desired pitch without sensor| 
-                                                    #  2-Empty| 3-Empty| 4-Yaw angle (if magnetometer present), ignored without magnetometer| 5-Latitude| 6-Longitude| 7-Altitude|
-    def publish_vehicle_command(self, command, param1=0.0, param2=0.0, param7=0.25):
+    def publish_vehicle_command(self, command, param1=0.0, param2=0.0, param7=0.0):
         msg = VehicleCommand()
         msg.param1 = param1
         msg.param2 = param2
