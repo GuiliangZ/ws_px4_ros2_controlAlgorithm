@@ -7,7 +7,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import threading
 import time
 import numpy as np
-import scvx_class as sc
+import ws_px4_ros2_controlAlgorithm.src.px4_offboard_mpc.px4_offboard_mpc.scvx_class_plot as sc
 
 class VehiclePositionSubscriber(Node):
     def __init__(self, data_lock, data_shared):

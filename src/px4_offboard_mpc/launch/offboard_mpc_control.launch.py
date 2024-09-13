@@ -14,8 +14,8 @@ def generate_launch_description():
         Node(
             package='px4_offboard_mpc',
             namespace='px4_offboard_mpc',
-            executable='offboard_safety_layer',
-            name='offboard_safety_layer'
+            executable='px4_offboard_safeLayer',
+            name='px4_offboard_safeLayer'
         ),
         Node(
             package='px4_offboard_mpc',
@@ -27,14 +27,26 @@ def generate_launch_description():
         Node(
             package='px4_offboard_mpc',
             namespace='px4_offboard_mpc',
-            executable='traj_control_scvx',
-            name='traj_control_scvx',
+            executable='px4_offboard_scvx',
+            name='px4_offboard_scvx',
         ),
         Node(
             package='px4_offboard_mpc',
             namespace='px4_offboard_mpc',
-            executable='px4_attitude',
-            name='px4_attitude'
+            executable='px4_attitude_plot',
+            name='px4_attitude_plot'
+        ),
+        Node(
+            package='px4_offboard_mpc',
+            namespace='px4_offboard_mpc',
+            executable='scvx_class',
+            name='scvx_class'
+        ),
+        Node(
+            package='px4_offboard_mpc',
+            namespace='px4_offboard_mpc',
+            executable='px4_attitude_plot',
+            name='px4_attitude_plot'
         ),
         Node(
             package='rviz2',

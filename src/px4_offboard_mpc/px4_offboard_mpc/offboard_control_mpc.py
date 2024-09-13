@@ -5,10 +5,9 @@ from px4_msgs.msg import OffboardControlMode, TrajectorySetpoint, VehicleCommand
 import numpy as np
 import cvxpy as cp
 import time
-from scvx_class import Scvx
 
 
-class OffboardControlScvx(Node):
+class OffboardControlMPC(Node):
     """Node for controlling a vehicle in offboard mode."""
 
     def __init__(self) -> None:
@@ -21,12 +20,12 @@ class OffboardControlScvx(Node):
             history=HistoryPolicy.KEEP_LAST,
             depth=1
         )
-        
+
         # Create publishers
         self.offboard_control_mode_publisher = self.create_publisher(
             OffboardControlMode, '/fmu/in/offboard_control_mode', qos_profile)
-        self.local_trajectory_setpoint_publisher = self.create_publisher(
-            TrajectorySetpoint, 'local_vehicle_command_control', qos_profile) #fmu/in/trajectory_setpoint
+        self.trajectory_setpoint_publisher = self.create_publisher(
+            TrajectorySetpoint, '/fmu/in/trajectory_setpoint', qos_profile)
         self.vehicle_command_publisher = self.create_publisher(
             VehicleCommand, '/fmu/in/vehicle_command', qos_profile)
 
@@ -47,7 +46,6 @@ class OffboardControlScvx(Node):
 
         self.entry_point = 1.5*np.array([2.0, 2.0, 2.0])
         self.destination = np.array([0.0, 0.0, 0.7])
-        self.scvx = Scvx(self.destination)
         self.control_mode = 'takeoff'  # Modes: 'position', 'MPC', 'landing'
 
         self.pos=True
@@ -118,18 +116,18 @@ class OffboardControlScvx(Node):
         msg.position = [x, y, -z]
         msg.yaw = 1.57079  # (90 degree)
         msg.timestamp = int(self.get_clock().now().nanoseconds / 1000)
-        self.local_trajectory_setpoint_publisher.publish(msg)
+        self.trajectory_setpoint_publisher.publish(msg)
         #self.get_logger().info(f"Publishing position setpoints {[x, y, z]}")
 
-    def publish_velocity_setpoint(self, control_inputs):
+    def publish_velocity_setpoint(self, x: float, y: float, z: float):
         """Publish the trajectory setpoint."""
         msg = TrajectorySetpoint()
         msg.position = [float('nan')] * 3
-        msg.velocity = [control_inputs[0], control_inputs[1], -control_inputs[2]]
+        msg.velocity = [x, y, -z]
         msg.yaw = 1.57079  # (90 degree)
         msg.timestamp = int(self.get_clock().now().nanoseconds / 1000)
-        self.local_trajectory_setpoint_publisher.publish(msg)
-        self.get_logger().info(f"Publishing velocity setpoints {[control_inputs[0], control_inputs[1], control_inputs[2]]}")
+        self.trajectory_setpoint_publisher.publish(msg)
+        self.get_logger().info(f"Publishing velocity setpoints {[x, y, z]}")
 
     def publish_takeoff(self):
         """Publish the trajectory setpoint."""
@@ -137,7 +135,7 @@ class OffboardControlScvx(Node):
         msg.position = [0.0, 0.0, -0.5]
         msg.yaw = 1.57079  # (90 degree)
         msg.timestamp = int(self.get_clock().now().nanoseconds / 1000)
-        self.local_trajectory_setpoint_publisher.publish(msg)
+        self.trajectory_setpoint_publisher.publish(msg)
         self.get_logger().info(f"Taking Off!")
 
     def publish_vehicle_command(self, command, **params) -> None:
@@ -159,9 +157,26 @@ class OffboardControlScvx(Node):
         msg.timestamp = int(self.get_clock().now().nanoseconds / 1000)
         self.vehicle_command_publisher.publish(msg)
 
-    def run_mpc(self, current_position):
-        self.control_inputs = self.scvx.mpc_controller(current_position)
-        
+    def initialize_mpc(self, initial_position):
+        """Setup and solve the MPC to compute the initial trajectory."""
+        constraints = [self.x1[0] == initial_position]
+        constraints += [self.x1[k+1] == self.x1[k] + self.dt * self.u1[k] for k in range(self.T)]
+        constraints += [cp.norm(self.u1[k], 2) <= 0.5 for k in range(self.T)]
+
+        objective = cp.Minimize(sum(cp.quad_form(self.x1[k]-self.destination, self.Q) + cp.quad_form(self.u1[k], self.R) for k in range(self.T)))
+        prob = cp.Problem(objective, constraints)
+        result = prob.solve()
+
+        # Update control inputs and state predictions
+        self.control_inputs = self.u1.value
+        self.state_predictions = self.x1.value
+
+    def mpc_control(self):
+        """Get the optimal control input from MPC."""
+        if self.control_inputs is not None:
+            return self.control_inputs[0]  # Return the first control action
+        else:
+            return np.zeros(self.nu)  # Default control if MPC not solved
 
 
     def timer_callback(self) -> None:
@@ -189,19 +204,18 @@ class OffboardControlScvx(Node):
             if np.linalg.norm(current_pos - self.entry_point) < 0.3:
                 self.control_mode = 'MPC'
                 # Initialize MPC with current state
-                self.run_mpc(current_pos)
+                self.initialize_mpc(current_pos)
                 self.pos=False
                 self.vel = True
         elif self.control_mode == 'MPC' and self.vehicle_status.nav_state == VehicleStatus.NAVIGATION_STATE_OFFBOARD:
-            self.run_mpc(current_pos)
-            
-            self.publish_velocity_setpoint(self.control_inputs)
+            self.initialize_mpc(current_pos)
+            self.publish_velocity_setpoint(*self.mpc_control())
             current_pos = np.array([
                 self.vehicle_local_position.x,
                 self.vehicle_local_position.y,
                 -self.vehicle_local_position.z
             ])
-            if np.linalg.norm(current_pos - self.destination) < 0.1 or current_pos[2]<0.1:
+            if np.linalg.norm(current_pos - self.destination) < 0.1 or current_pos[2]<0.5:
                 self.control_mode = 'landing'
                 self.land()
                 exit(0)
@@ -211,23 +225,13 @@ class OffboardControlScvx(Node):
         if self.offboard_setpoint_counter < 21:
             self.offboard_setpoint_counter += 1
 
-def update(state,control,dt):
-    noise = np.random.normal(0, 0.001, size=state.shape)
-    return state+(control*dt)+noise
-
-def simulate_dynamics(initial_state, control, T, dt):
-    states = [initial_state]
-    for _ in range(T - 1):
-        next_state = update(states[-1], control, dt)
-        states.append(next_state)
-    return np.array(states)
 
 def main(args=None) -> None:
     print('Starting offboard control node...')
     rclpy.init(args=args)
-    offboard_control_scvx = OffboardControlScvx()
-    rclpy.spin(offboard_control_scvx)
-    offboard_control_scvx.destroy_node()
+    offboard_control_mpc = OffboardControlMPC()
+    rclpy.spin(offboard_control_mpc)
+    offboard_control_mpc.destroy_node()
     rclpy.shutdown()
 
 
