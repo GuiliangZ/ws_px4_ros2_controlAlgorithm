@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'px4_offboard_MPC-velocity'
+package_name = 'px4_offboard_mpc'
 
 setup(
     name=package_name,
@@ -13,13 +13,16 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='guiliang-linux',
-    maintainer_email='guiliangzheng@outlook.com',
+    maintainer='mist',
+    maintainer_email='josh.holder72@gmail.com',
     description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'px4_offboard_MPC = px4_offboard_MPC.offboard_control_MPC:main',
+            'px4_offboard_Scvx = px4_offboard_MPC.offboard_control_scvx:main',
+            'px4_offboard_safeLayer = px4_offboard_MPC.offboard_control_safeLayer:main'
         ],
     },
 )
