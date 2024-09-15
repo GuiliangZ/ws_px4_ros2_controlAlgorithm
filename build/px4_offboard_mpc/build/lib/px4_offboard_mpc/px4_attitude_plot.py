@@ -60,7 +60,7 @@ def plot_thread(data_lock, data_shared):
 
     plt.ion()
     plt.show()
-
+ 
     time_start = time.time()
 
     while plt.fignum_exists(fig.number):
