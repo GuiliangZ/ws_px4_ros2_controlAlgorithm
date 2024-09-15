@@ -14,10 +14,10 @@ commands = [
     "cd ~/Documents/projects/DroneProject/PX4-Autopilot && make px4_sitl gz_x500",
     
     # Run QGroundControl
-    "cd ~/Documents/projects/DroneProject && ./QGroundControl.AppImage"
+    "cd ~/Documents/projects/DroneProject && ./QGroundControl.AppImage",
 
     #Source the ros2 environment to a new terminal
-    "source /opt/ros/humble/setup.bash && source install/local_setup.bash",
+    "cd ~/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm && source /opt/ros/humble/setup.bash && source install/local_setup.bash",
 ]
 
 # Loop through each command in the list

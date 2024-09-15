@@ -19,6 +19,7 @@ px4_offboard_mpc/scvx_class.py
 px4_offboard_mpc/vicon_attituded.py
 px4_offboard_mpc/visualizer.py
 resource/px4_offboard_mpc
+resource/visualize.rviz
 test/test_copyright.py
 test/test_flake8.py
 test/test_pep257.py

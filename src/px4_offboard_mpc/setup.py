@@ -30,7 +30,7 @@ setup(
             'px4_offboard_scvx = px4_offboard_mpc.offboard_control_scvx:main',
             'px4_offboard_safeLayer = px4_offboard_mpc.offboard_control_safeLayer:main',
             'processes = px4_offboard_mpc.processes:main',
-            'px4_attitude_plot = px4_offboard_mpc.px4_attitude:main',
+            'px4_attitude_plot = px4_offboard_mpc.px4_attitude_plot:main',
             'scvx_class = px4_offboard_mpc.scvx_class:main',
             'visualizer = px4_offboard_mpc.visualizer:main',
         ],
