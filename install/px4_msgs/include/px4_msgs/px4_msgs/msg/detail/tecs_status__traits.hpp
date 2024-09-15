@@ -183,6 +183,13 @@ inline void to_flow_style_yaml(
   {
     out << "underspeed_ratio: ";
     rosidl_generator_traits::value_to_yaml(msg.underspeed_ratio, out);
+    out << ", ";
+  }
+
+  // member: fast_descend_ratio
+  {
+    out << "fast_descend_ratio: ";
+    rosidl_generator_traits::value_to_yaml(msg.fast_descend_ratio, out);
   }
   out << "}";
 }  // NOLINT(readability/fn_size)
@@ -418,6 +425,16 @@ inline void to_block_style_yaml(
     }
     out << "underspeed_ratio: ";
     rosidl_generator_traits::value_to_yaml(msg.underspeed_ratio, out);
+    out << "\n";
+  }
+
+  // member: fast_descend_ratio
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "fast_descend_ratio: ";
+    rosidl_generator_traits::value_to_yaml(msg.fast_descend_ratio, out);
     out << "\n";
   }
 }  // NOLINT(readability/fn_size)

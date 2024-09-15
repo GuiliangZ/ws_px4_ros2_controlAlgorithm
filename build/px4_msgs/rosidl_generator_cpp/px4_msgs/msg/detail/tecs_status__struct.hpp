@@ -61,6 +61,7 @@ struct TecsStatus_
       this->pitch_sp_rad = 0.0f;
       this->throttle_trim = 0.0f;
       this->underspeed_ratio = 0.0f;
+      this->fast_descend_ratio = 0.0f;
     }
   }
 
@@ -93,6 +94,7 @@ struct TecsStatus_
       this->pitch_sp_rad = 0.0f;
       this->throttle_trim = 0.0f;
       this->underspeed_ratio = 0.0f;
+      this->fast_descend_ratio = 0.0f;
     }
   }
 
@@ -166,6 +168,9 @@ struct TecsStatus_
   using _underspeed_ratio_type =
     float;
   _underspeed_ratio_type underspeed_ratio;
+  using _fast_descend_ratio_type =
+    float;
+  _fast_descend_ratio_type fast_descend_ratio;
 
   // setters for named parameter idiom
   Type & set__timestamp(
@@ -306,6 +311,12 @@ struct TecsStatus_
     this->underspeed_ratio = _arg;
     return *this;
   }
+  Type & set__fast_descend_ratio(
+    const float & _arg)
+  {
+    this->fast_descend_ratio = _arg;
+    return *this;
+  }
 
   // constant declarations
 
@@ -416,6 +427,9 @@ struct TecsStatus_
       return false;
     }
     if (this->underspeed_ratio != other.underspeed_ratio) {
+      return false;
+    }
+    if (this->fast_descend_ratio != other.fast_descend_ratio) {
       return false;
     }
     return true;

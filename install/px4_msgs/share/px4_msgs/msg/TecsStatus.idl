@@ -117,6 +117,11 @@ module px4_msgs {
       @verbatim (language="comment", text=
         "0: no underspeed, 1: maximal underspeed. Controller takes measures to avoid stall proportional to ratio if >0.")
       float underspeed_ratio;
+
+      @verbatim (language="comment", text=
+        "value indicating if fast descend mode is enabled with ramp up and ramp down")
+      @unit (value="0-1")
+      float fast_descend_ratio;
     };
   };
 };

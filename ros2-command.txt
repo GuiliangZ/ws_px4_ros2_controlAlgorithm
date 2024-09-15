@@ -24,6 +24,12 @@ source install/local_setup.bash
 ros2 launch px4_offboard offboard_velocity_control.launch.py
 ros2 run px4_offboard position_velocity
 
+##MPC packages
+colcon build --packages-select px4_offboard_mpc
+ros2 launch px4_offboard_mpc offboard_mpc_control.launch.py
+ros2 run px4_offboard_mpc px4_offboard_scvx
+ros2 run px4_offboard_mpc px4_attitude_plot
+
 ros2 launch px4_ros_com sensor_combined_listener.launch.py
 
 ros2 topic echo /fmu/in/vehicle_visual_odometry

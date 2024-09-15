@@ -15,6 +15,9 @@ commands = [
     
     # Run QGroundControl
     "cd ~/Documents/projects/DroneProject && ./QGroundControl.AppImage"
+
+    #Source the ros2 environment to a new terminal
+    "source /opt/ros/humble/setup.bash && source install/local_setup.bash",
 ]
 
 # Loop through each command in the list

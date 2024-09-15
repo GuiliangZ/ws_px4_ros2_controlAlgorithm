@@ -1,0 +1,2 @@
+[console_scripts]
+px4_offboard_position = px4_offboard_position.offboard_control:main

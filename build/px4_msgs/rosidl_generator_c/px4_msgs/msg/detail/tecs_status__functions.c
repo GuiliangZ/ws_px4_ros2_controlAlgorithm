@@ -40,6 +40,7 @@ px4_msgs__msg__TecsStatus__init(px4_msgs__msg__TecsStatus * msg)
   // pitch_sp_rad
   // throttle_trim
   // underspeed_ratio
+  // fast_descend_ratio
   return true;
 }
 
@@ -72,6 +73,7 @@ px4_msgs__msg__TecsStatus__fini(px4_msgs__msg__TecsStatus * msg)
   // pitch_sp_rad
   // throttle_trim
   // underspeed_ratio
+  // fast_descend_ratio
 }
 
 bool
@@ -172,6 +174,10 @@ px4_msgs__msg__TecsStatus__are_equal(const px4_msgs__msg__TecsStatus * lhs, cons
   if (lhs->underspeed_ratio != rhs->underspeed_ratio) {
     return false;
   }
+  // fast_descend_ratio
+  if (lhs->fast_descend_ratio != rhs->fast_descend_ratio) {
+    return false;
+  }
   return true;
 }
 
@@ -229,6 +235,8 @@ px4_msgs__msg__TecsStatus__copy(
   output->throttle_trim = input->throttle_trim;
   // underspeed_ratio
   output->underspeed_ratio = input->underspeed_ratio;
+  // fast_descend_ratio
+  output->fast_descend_ratio = input->fast_descend_ratio;
   return true;
 }
 

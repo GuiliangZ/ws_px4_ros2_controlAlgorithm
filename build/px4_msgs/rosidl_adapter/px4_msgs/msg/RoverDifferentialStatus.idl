@@ -17,18 +17,26 @@ module px4_msgs {
 
       @verbatim (language="comment", text=
         "Actual yaw of the rover")
-      @unit (value="deg")
-      float actual_yaw_deg;
+      @unit (value="rad")
+      float actual_yaw;
 
       @verbatim (language="comment", text=
         "Actual yaw rate of the rover")
-      @unit (value="deg/s")
-      float actual_yaw_rate_deg_s;
+      @unit (value="rad/s")
+      float actual_yaw_rate;
 
       @verbatim (language="comment", text=
         "Yaw rate setpoint for the closed loop yaw rate controller")
-      @unit (value="deg/s")
-      float desired_yaw_rate_deg_s;
+      @unit (value="rad/s")
+      float desired_yaw_rate;
+
+      @verbatim (language="comment", text=
+        "[-1, 1] Normalized forward speed setpoint")
+      float forward_speed_normalized;
+
+      @verbatim (language="comment", text=
+        "[-1, 1] Normalized speed difference setpoint between the left and right motor")
+      float speed_diff_normalized;
 
       @verbatim (language="comment", text=
         "Integral of the PID for the closed loop yaw controller")

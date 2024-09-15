@@ -1,8 +1,8 @@
-# Install script for directory: /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_msgs/px4_msgs__py
+# Install script for directory: /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_msgs/px4_msgs__py
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/install/px4_msgs")
+  set(CMAKE_INSTALL_PREFIX "/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_msgs")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

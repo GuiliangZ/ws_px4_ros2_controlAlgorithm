@@ -164,6 +164,11 @@ static bool _TecsStatus__cdr_serialize(
     cdr << ros_message->underspeed_ratio;
   }
 
+  // Field name: fast_descend_ratio
+  {
+    cdr << ros_message->fast_descend_ratio;
+  }
+
   return true;
 }
 
@@ -289,6 +294,11 @@ static bool _TecsStatus__cdr_deserialize(
   // Field name: underspeed_ratio
   {
     cdr >> ros_message->underspeed_ratio;
+  }
+
+  // Field name: fast_descend_ratio
+  {
+    cdr >> ros_message->fast_descend_ratio;
   }
 
   return true;
@@ -443,6 +453,12 @@ size_t get_serialized_size_px4_msgs__msg__TecsStatus(
   // field.name underspeed_ratio
   {
     size_t item_size = sizeof(ros_message->underspeed_ratio);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // field.name fast_descend_ratio
+  {
+    size_t item_size = sizeof(ros_message->fast_descend_ratio);
     current_alignment += item_size +
       eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
   }
@@ -659,6 +675,14 @@ size_t max_serialized_size_px4_msgs__msg__TecsStatus(
     current_alignment += array_size * sizeof(uint32_t) +
       eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
   }
+  // member: fast_descend_ratio
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint32_t);
+    current_alignment += array_size * sizeof(uint32_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
+  }
 
   size_t ret_val = current_alignment - initial_alignment;
   if (is_plain) {
@@ -668,7 +692,7 @@ size_t max_serialized_size_px4_msgs__msg__TecsStatus(
     using DataType = px4_msgs__msg__TecsStatus;
     is_plain =
       (
-      offsetof(DataType, underspeed_ratio) +
+      offsetof(DataType, fast_descend_ratio) +
       last_member_size
       ) == ret_val;
   }

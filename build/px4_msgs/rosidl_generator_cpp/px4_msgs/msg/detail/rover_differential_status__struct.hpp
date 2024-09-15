@@ -40,9 +40,11 @@ struct RoverDifferentialStatus_
     {
       this->timestamp = 0ull;
       this->actual_speed = 0.0f;
-      this->actual_yaw_deg = 0.0f;
-      this->actual_yaw_rate_deg_s = 0.0f;
-      this->desired_yaw_rate_deg_s = 0.0f;
+      this->actual_yaw = 0.0f;
+      this->actual_yaw_rate = 0.0f;
+      this->desired_yaw_rate = 0.0f;
+      this->forward_speed_normalized = 0.0f;
+      this->speed_diff_normalized = 0.0f;
       this->pid_yaw_integral = 0.0f;
       this->pid_yaw_rate_integral = 0.0f;
       this->pid_throttle_integral = 0.0f;
@@ -57,9 +59,11 @@ struct RoverDifferentialStatus_
     {
       this->timestamp = 0ull;
       this->actual_speed = 0.0f;
-      this->actual_yaw_deg = 0.0f;
-      this->actual_yaw_rate_deg_s = 0.0f;
-      this->desired_yaw_rate_deg_s = 0.0f;
+      this->actual_yaw = 0.0f;
+      this->actual_yaw_rate = 0.0f;
+      this->desired_yaw_rate = 0.0f;
+      this->forward_speed_normalized = 0.0f;
+      this->speed_diff_normalized = 0.0f;
       this->pid_yaw_integral = 0.0f;
       this->pid_yaw_rate_integral = 0.0f;
       this->pid_throttle_integral = 0.0f;
@@ -73,15 +77,21 @@ struct RoverDifferentialStatus_
   using _actual_speed_type =
     float;
   _actual_speed_type actual_speed;
-  using _actual_yaw_deg_type =
+  using _actual_yaw_type =
     float;
-  _actual_yaw_deg_type actual_yaw_deg;
-  using _actual_yaw_rate_deg_s_type =
+  _actual_yaw_type actual_yaw;
+  using _actual_yaw_rate_type =
     float;
-  _actual_yaw_rate_deg_s_type actual_yaw_rate_deg_s;
-  using _desired_yaw_rate_deg_s_type =
+  _actual_yaw_rate_type actual_yaw_rate;
+  using _desired_yaw_rate_type =
     float;
-  _desired_yaw_rate_deg_s_type desired_yaw_rate_deg_s;
+  _desired_yaw_rate_type desired_yaw_rate;
+  using _forward_speed_normalized_type =
+    float;
+  _forward_speed_normalized_type forward_speed_normalized;
+  using _speed_diff_normalized_type =
+    float;
+  _speed_diff_normalized_type speed_diff_normalized;
   using _pid_yaw_integral_type =
     float;
   _pid_yaw_integral_type pid_yaw_integral;
@@ -105,22 +115,34 @@ struct RoverDifferentialStatus_
     this->actual_speed = _arg;
     return *this;
   }
-  Type & set__actual_yaw_deg(
+  Type & set__actual_yaw(
     const float & _arg)
   {
-    this->actual_yaw_deg = _arg;
+    this->actual_yaw = _arg;
     return *this;
   }
-  Type & set__actual_yaw_rate_deg_s(
+  Type & set__actual_yaw_rate(
     const float & _arg)
   {
-    this->actual_yaw_rate_deg_s = _arg;
+    this->actual_yaw_rate = _arg;
     return *this;
   }
-  Type & set__desired_yaw_rate_deg_s(
+  Type & set__desired_yaw_rate(
     const float & _arg)
   {
-    this->desired_yaw_rate_deg_s = _arg;
+    this->desired_yaw_rate = _arg;
+    return *this;
+  }
+  Type & set__forward_speed_normalized(
+    const float & _arg)
+  {
+    this->forward_speed_normalized = _arg;
+    return *this;
+  }
+  Type & set__speed_diff_normalized(
+    const float & _arg)
+  {
+    this->speed_diff_normalized = _arg;
     return *this;
   }
   Type & set__pid_yaw_integral(
@@ -190,13 +212,19 @@ struct RoverDifferentialStatus_
     if (this->actual_speed != other.actual_speed) {
       return false;
     }
-    if (this->actual_yaw_deg != other.actual_yaw_deg) {
+    if (this->actual_yaw != other.actual_yaw) {
       return false;
     }
-    if (this->actual_yaw_rate_deg_s != other.actual_yaw_rate_deg_s) {
+    if (this->actual_yaw_rate != other.actual_yaw_rate) {
       return false;
     }
-    if (this->desired_yaw_rate_deg_s != other.desired_yaw_rate_deg_s) {
+    if (this->desired_yaw_rate != other.desired_yaw_rate) {
+      return false;
+    }
+    if (this->forward_speed_normalized != other.forward_speed_normalized) {
+      return false;
+    }
+    if (this->speed_diff_normalized != other.speed_diff_normalized) {
       return false;
     }
     if (this->pid_yaw_integral != other.pid_yaw_integral) {

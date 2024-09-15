@@ -25,11 +25,15 @@ typedef struct px4_msgs__msg__RoverDifferentialStatus
   /// Actual forward speed of the rover
   float actual_speed;
   /// Actual yaw of the rover
-  float actual_yaw_deg;
+  float actual_yaw;
   /// Actual yaw rate of the rover
-  float actual_yaw_rate_deg_s;
+  float actual_yaw_rate;
   /// Yaw rate setpoint for the closed loop yaw rate controller
-  float desired_yaw_rate_deg_s;
+  float desired_yaw_rate;
+  /// [-1, 1] Normalized forward speed setpoint
+  float forward_speed_normalized;
+  /// [-1, 1] Normalized speed difference setpoint between the left and right motor
+  float speed_diff_normalized;
   /// Integral of the PID for the closed loop yaw controller
   float pid_yaw_integral;
   /// Integral of the PID for the closed loop yaw rate controller

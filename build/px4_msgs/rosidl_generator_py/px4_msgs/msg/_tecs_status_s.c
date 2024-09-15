@@ -257,6 +257,15 @@ bool px4_msgs__msg__tecs_status__convert_from_py(PyObject * _pymsg, void * _ros_
     ros_message->underspeed_ratio = (float)PyFloat_AS_DOUBLE(field);
     Py_DECREF(field);
   }
+  {  // fast_descend_ratio
+    PyObject * field = PyObject_GetAttrString(_pymsg, "fast_descend_ratio");
+    if (!field) {
+      return false;
+    }
+    assert(PyFloat_Check(field));
+    ros_message->fast_descend_ratio = (float)PyFloat_AS_DOUBLE(field);
+    Py_DECREF(field);
+  }
 
   return true;
 }
@@ -526,6 +535,17 @@ PyObject * px4_msgs__msg__tecs_status__convert_to_py(void * raw_ros_message)
     field = PyFloat_FromDouble(ros_message->underspeed_ratio);
     {
       int rc = PyObject_SetAttrString(_pymessage, "underspeed_ratio", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
+  {  // fast_descend_ratio
+    PyObject * field = NULL;
+    field = PyFloat_FromDouble(ros_message->fast_descend_ratio);
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "fast_descend_ratio", field);
       Py_DECREF(field);
       if (rc) {
         return NULL;

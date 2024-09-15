@@ -19,9 +19,11 @@ px4_msgs__msg__RoverDifferentialStatus__init(px4_msgs__msg__RoverDifferentialSta
   }
   // timestamp
   // actual_speed
-  // actual_yaw_deg
-  // actual_yaw_rate_deg_s
-  // desired_yaw_rate_deg_s
+  // actual_yaw
+  // actual_yaw_rate
+  // desired_yaw_rate
+  // forward_speed_normalized
+  // speed_diff_normalized
   // pid_yaw_integral
   // pid_yaw_rate_integral
   // pid_throttle_integral
@@ -36,9 +38,11 @@ px4_msgs__msg__RoverDifferentialStatus__fini(px4_msgs__msg__RoverDifferentialSta
   }
   // timestamp
   // actual_speed
-  // actual_yaw_deg
-  // actual_yaw_rate_deg_s
-  // desired_yaw_rate_deg_s
+  // actual_yaw
+  // actual_yaw_rate
+  // desired_yaw_rate
+  // forward_speed_normalized
+  // speed_diff_normalized
   // pid_yaw_integral
   // pid_yaw_rate_integral
   // pid_throttle_integral
@@ -58,16 +62,24 @@ px4_msgs__msg__RoverDifferentialStatus__are_equal(const px4_msgs__msg__RoverDiff
   if (lhs->actual_speed != rhs->actual_speed) {
     return false;
   }
-  // actual_yaw_deg
-  if (lhs->actual_yaw_deg != rhs->actual_yaw_deg) {
+  // actual_yaw
+  if (lhs->actual_yaw != rhs->actual_yaw) {
     return false;
   }
-  // actual_yaw_rate_deg_s
-  if (lhs->actual_yaw_rate_deg_s != rhs->actual_yaw_rate_deg_s) {
+  // actual_yaw_rate
+  if (lhs->actual_yaw_rate != rhs->actual_yaw_rate) {
     return false;
   }
-  // desired_yaw_rate_deg_s
-  if (lhs->desired_yaw_rate_deg_s != rhs->desired_yaw_rate_deg_s) {
+  // desired_yaw_rate
+  if (lhs->desired_yaw_rate != rhs->desired_yaw_rate) {
+    return false;
+  }
+  // forward_speed_normalized
+  if (lhs->forward_speed_normalized != rhs->forward_speed_normalized) {
+    return false;
+  }
+  // speed_diff_normalized
+  if (lhs->speed_diff_normalized != rhs->speed_diff_normalized) {
     return false;
   }
   // pid_yaw_integral
@@ -97,12 +109,16 @@ px4_msgs__msg__RoverDifferentialStatus__copy(
   output->timestamp = input->timestamp;
   // actual_speed
   output->actual_speed = input->actual_speed;
-  // actual_yaw_deg
-  output->actual_yaw_deg = input->actual_yaw_deg;
-  // actual_yaw_rate_deg_s
-  output->actual_yaw_rate_deg_s = input->actual_yaw_rate_deg_s;
-  // desired_yaw_rate_deg_s
-  output->desired_yaw_rate_deg_s = input->desired_yaw_rate_deg_s;
+  // actual_yaw
+  output->actual_yaw = input->actual_yaw;
+  // actual_yaw_rate
+  output->actual_yaw_rate = input->actual_yaw_rate;
+  // desired_yaw_rate
+  output->desired_yaw_rate = input->desired_yaw_rate;
+  // forward_speed_normalized
+  output->forward_speed_normalized = input->forward_speed_normalized;
+  // speed_diff_normalized
+  output->speed_diff_normalized = input->speed_diff_normalized;
   // pid_yaw_integral
   output->pid_yaw_integral = input->pid_yaw_integral;
   // pid_yaw_rate_integral

@@ -1,0 +1,39 @@
+running egg_info
+writing ../../build/px4_offboard_mpc/px4_offboard_mpc.egg-info/PKG-INFO
+writing dependency_links to ../../build/px4_offboard_mpc/px4_offboard_mpc.egg-info/dependency_links.txt
+writing entry points to ../../build/px4_offboard_mpc/px4_offboard_mpc.egg-info/entry_points.txt
+writing requirements to ../../build/px4_offboard_mpc/px4_offboard_mpc.egg-info/requires.txt
+writing top-level names to ../../build/px4_offboard_mpc/px4_offboard_mpc.egg-info/top_level.txt
+reading manifest file '../../build/px4_offboard_mpc/px4_offboard_mpc.egg-info/SOURCES.txt'
+writing manifest file '../../build/px4_offboard_mpc/px4_offboard_mpc.egg-info/SOURCES.txt'
+running build
+running build_py
+copying px4_offboard_mpc/processes.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_mpc/build/lib/px4_offboard_mpc
+copying px4_offboard_mpc/vicon_attituded.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_mpc/build/lib/px4_offboard_mpc
+copying px4_offboard_mpc/visualizer.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_mpc/build/lib/px4_offboard_mpc
+copying px4_offboard_mpc/scvx_class.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_mpc/build/lib/px4_offboard_mpc
+copying px4_offboard_mpc/offboard_control_safeLayer.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_mpc/build/lib/px4_offboard_mpc
+copying px4_offboard_mpc/offboard_control_scvx.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_mpc/build/lib/px4_offboard_mpc
+copying px4_offboard_mpc/offboard_control_mpc.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_mpc/build/lib/px4_offboard_mpc
+copying px4_offboard_mpc/__init__.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_mpc/build/lib/px4_offboard_mpc
+copying px4_offboard_mpc/px4_attitude_plot.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_mpc/build/lib/px4_offboard_mpc
+running install
+running install_lib
+copying /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_mpc/build/lib/px4_offboard_mpc/scvx_class.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_mpc/lib/python3.10/site-packages/px4_offboard_mpc
+byte-compiling /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_mpc/lib/python3.10/site-packages/px4_offboard_mpc/scvx_class.py to scvx_class.cpython-310.pyc
+running install_data
+copying resource/px4_offboard_mpc -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_mpc/share/ament_index/resource_index/packages
+copying package.xml -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_mpc/share/px4_offboard_mpc
+copying launch/offboard_mpc_control.launch.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_mpc/share/px4_offboard_mpc
+running install_egg_info
+removing '/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_mpc/lib/python3.10/site-packages/px4_offboard_mpc-0.0.0-py3.10.egg-info' (and everything under it)
+Copying ../../build/px4_offboard_mpc/px4_offboard_mpc.egg-info to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_mpc/lib/python3.10/site-packages/px4_offboard_mpc-0.0.0-py3.10.egg-info
+running install_scripts
+Installing processes script to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_mpc/lib/px4_offboard_mpc
+Installing px4_attitude_plot script to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_mpc/lib/px4_offboard_mpc
+Installing px4_offboard_mpc script to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_mpc/lib/px4_offboard_mpc
+Installing px4_offboard_safeLayer script to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_mpc/lib/px4_offboard_mpc
+Installing px4_offboard_scvx script to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_mpc/lib/px4_offboard_mpc
+Installing scvx_class script to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_mpc/lib/px4_offboard_mpc
+Installing visualizer script to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_mpc/lib/px4_offboard_mpc
+writing list of installed files to '/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_mpc/install.log'

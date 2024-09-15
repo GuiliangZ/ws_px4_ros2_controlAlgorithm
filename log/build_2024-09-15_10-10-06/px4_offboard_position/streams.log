@@ -1,0 +1,37 @@
+[0.674s] Invoking command in '/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/src/px4_offboard_position': PYTHONPATH=/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_position/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_position/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/px4_offboard_position build --build-base /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_position/build install --record /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_position/install.log --single-version-externally-managed install_data
+[0.824s] running egg_info
+[0.824s] creating ../../build/px4_offboard_position/px4_offboard_position.egg-info
+[0.834s] writing ../../build/px4_offboard_position/px4_offboard_position.egg-info/PKG-INFO
+[0.834s] writing dependency_links to ../../build/px4_offboard_position/px4_offboard_position.egg-info/dependency_links.txt
+[0.834s] writing entry points to ../../build/px4_offboard_position/px4_offboard_position.egg-info/entry_points.txt
+[0.834s] writing requirements to ../../build/px4_offboard_position/px4_offboard_position.egg-info/requires.txt
+[0.834s] writing top-level names to ../../build/px4_offboard_position/px4_offboard_position.egg-info/top_level.txt
+[0.835s] writing manifest file '../../build/px4_offboard_position/px4_offboard_position.egg-info/SOURCES.txt'
+[0.854s] reading manifest file '../../build/px4_offboard_position/px4_offboard_position.egg-info/SOURCES.txt'
+[0.855s] writing manifest file '../../build/px4_offboard_position/px4_offboard_position.egg-info/SOURCES.txt'
+[0.855s] running build
+[0.855s] running build_py
+[0.855s] creating /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_position/build
+[0.855s] creating /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_position/build/lib
+[0.855s] creating /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_position/build/lib/px4_offboard_position
+[0.855s] copying px4_offboard_position/offboard_control.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_position/build/lib/px4_offboard_position
+[0.855s] copying px4_offboard_position/__init__.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_position/build/lib/px4_offboard_position
+[0.855s] running install
+[0.858s] running install_lib
+[0.868s] creating /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_position/lib/python3.10/site-packages/px4_offboard_position
+[0.868s] copying /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_position/build/lib/px4_offboard_position/offboard_control.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_position/lib/python3.10/site-packages/px4_offboard_position
+[0.868s] copying /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_position/build/lib/px4_offboard_position/__init__.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_position/lib/python3.10/site-packages/px4_offboard_position
+[0.868s] byte-compiling /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_position/lib/python3.10/site-packages/px4_offboard_position/offboard_control.py to offboard_control.cpython-310.pyc
+[0.869s] byte-compiling /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_position/lib/python3.10/site-packages/px4_offboard_position/__init__.py to __init__.cpython-310.pyc
+[0.869s] running install_data
+[0.869s] creating /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_position/share/ament_index
+[0.869s] creating /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_position/share/ament_index/resource_index
+[0.869s] creating /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_position/share/ament_index/resource_index/packages
+[0.869s] copying resource/px4_offboard_position -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_position/share/ament_index/resource_index/packages
+[0.869s] copying package.xml -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_position/share/px4_offboard_position
+[0.869s] running install_egg_info
+[0.880s] Copying ../../build/px4_offboard_position/px4_offboard_position.egg-info to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_position/lib/python3.10/site-packages/px4_offboard_position-0.0.0-py3.10.egg-info
+[0.880s] running install_scripts
+[0.979s] Installing px4_offboard_position script to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_position/lib/px4_offboard_position
+[0.979s] writing list of installed files to '/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_position/install.log'
+[0.999s] Invoked command in '/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/src/px4_offboard_position' returned '0': PYTHONPATH=/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_position/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard_position/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/px4_offboard_position build --build-base /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_position/build install --record /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard_position/install.log --single-version-externally-managed install_data

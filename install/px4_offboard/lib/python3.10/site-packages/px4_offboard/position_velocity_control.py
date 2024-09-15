@@ -310,10 +310,6 @@ def main(args=None) -> None:
 
     position_velocity = PositionVelocityControl()
 
-    # Use a MultiThreadedExecutor to handle multiple threads
-    executor = MultiThreadedExecutor()
-    executor.add_node(position_velocity)
-
     rclpy.spin(position_velocity)
 
     position_velocity.destroy_node()

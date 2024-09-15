@@ -66,6 +66,8 @@ typedef struct px4_msgs__msg__TecsStatus
   float throttle_trim;
   /// 0: no underspeed, 1: maximal underspeed. Controller takes measures to avoid stall proportional to ratio if >0.
   float underspeed_ratio;
+  /// value indicating if fast descend mode is enabled with ramp up and ramp down
+  float fast_descend_ratio;
 } px4_msgs__msg__TecsStatus;
 
 // Struct for a sequence of px4_msgs__msg__TecsStatus.

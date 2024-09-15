@@ -21,16 +21,32 @@ namespace msg
 namespace builder
 {
 
+class Init_TecsStatus_fast_descend_ratio
+{
+public:
+  explicit Init_TecsStatus_fast_descend_ratio(::px4_msgs::msg::TecsStatus & msg)
+  : msg_(msg)
+  {}
+  ::px4_msgs::msg::TecsStatus fast_descend_ratio(::px4_msgs::msg::TecsStatus::_fast_descend_ratio_type arg)
+  {
+    msg_.fast_descend_ratio = std::move(arg);
+    return std::move(msg_);
+  }
+
+private:
+  ::px4_msgs::msg::TecsStatus msg_;
+};
+
 class Init_TecsStatus_underspeed_ratio
 {
 public:
   explicit Init_TecsStatus_underspeed_ratio(::px4_msgs::msg::TecsStatus & msg)
   : msg_(msg)
   {}
-  ::px4_msgs::msg::TecsStatus underspeed_ratio(::px4_msgs::msg::TecsStatus::_underspeed_ratio_type arg)
+  Init_TecsStatus_fast_descend_ratio underspeed_ratio(::px4_msgs::msg::TecsStatus::_underspeed_ratio_type arg)
   {
     msg_.underspeed_ratio = std::move(arg);
-    return std::move(msg_);
+    return Init_TecsStatus_fast_descend_ratio(msg_);
   }
 
 private:

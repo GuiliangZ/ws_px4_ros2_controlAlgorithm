@@ -80,6 +80,7 @@ class TecsStatus(metaclass=Metaclass_TecsStatus):
         '_pitch_sp_rad',
         '_throttle_trim',
         '_underspeed_ratio',
+        '_fast_descend_ratio',
     ]
 
     _fields_and_field_types = {
@@ -106,10 +107,12 @@ class TecsStatus(metaclass=Metaclass_TecsStatus):
         'pitch_sp_rad': 'float',
         'throttle_trim': 'float',
         'underspeed_ratio': 'float',
+        'fast_descend_ratio': 'float',
     }
 
     SLOT_TYPES = (
         rosidl_parser.definition.BasicType('uint64'),  # noqa: E501
+        rosidl_parser.definition.BasicType('float'),  # noqa: E501
         rosidl_parser.definition.BasicType('float'),  # noqa: E501
         rosidl_parser.definition.BasicType('float'),  # noqa: E501
         rosidl_parser.definition.BasicType('float'),  # noqa: E501
@@ -161,6 +164,7 @@ class TecsStatus(metaclass=Metaclass_TecsStatus):
         self.pitch_sp_rad = kwargs.get('pitch_sp_rad', float())
         self.throttle_trim = kwargs.get('throttle_trim', float())
         self.underspeed_ratio = kwargs.get('underspeed_ratio', float())
+        self.fast_descend_ratio = kwargs.get('fast_descend_ratio', float())
 
     def __repr__(self):
         typename = self.__class__.__module__.split('.')
@@ -236,6 +240,8 @@ class TecsStatus(metaclass=Metaclass_TecsStatus):
         if self.throttle_trim != other.throttle_trim:
             return False
         if self.underspeed_ratio != other.underspeed_ratio:
+            return False
+        if self.fast_descend_ratio != other.fast_descend_ratio:
             return False
         return True
 
@@ -588,3 +594,18 @@ class TecsStatus(metaclass=Metaclass_TecsStatus):
             assert not (value < -3.402823466e+38 or value > 3.402823466e+38) or math.isinf(value), \
                 "The 'underspeed_ratio' field must be a float in [-3.402823466e+38, 3.402823466e+38]"
         self._underspeed_ratio = value
+
+    @builtins.property
+    def fast_descend_ratio(self):
+        """Message field 'fast_descend_ratio'."""
+        return self._fast_descend_ratio
+
+    @fast_descend_ratio.setter
+    def fast_descend_ratio(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, float), \
+                "The 'fast_descend_ratio' field must be of type 'float'"
+            assert not (value < -3.402823466e+38 or value > 3.402823466e+38) or math.isinf(value), \
+                "The 'fast_descend_ratio' field must be a float in [-3.402823466e+38, 3.402823466e+38]"
+        self._fast_descend_ratio = value

@@ -1,4 +1,0 @@
-Invoking command in '/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_msgs -- -j4 -l4
-Invoked command in '/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_msgs -- -j4 -l4
-Invoking command in '/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_msgs
-Invoked command in '/home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/guiliang-linux/ws_px4_ros2_controlAlgorithm/build/px4_msgs

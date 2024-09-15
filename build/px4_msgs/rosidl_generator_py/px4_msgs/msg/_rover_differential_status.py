@@ -59,9 +59,11 @@ class RoverDifferentialStatus(metaclass=Metaclass_RoverDifferentialStatus):
     __slots__ = [
         '_timestamp',
         '_actual_speed',
-        '_actual_yaw_deg',
-        '_actual_yaw_rate_deg_s',
-        '_desired_yaw_rate_deg_s',
+        '_actual_yaw',
+        '_actual_yaw_rate',
+        '_desired_yaw_rate',
+        '_forward_speed_normalized',
+        '_speed_diff_normalized',
         '_pid_yaw_integral',
         '_pid_yaw_rate_integral',
         '_pid_throttle_integral',
@@ -70,9 +72,11 @@ class RoverDifferentialStatus(metaclass=Metaclass_RoverDifferentialStatus):
     _fields_and_field_types = {
         'timestamp': 'uint64',
         'actual_speed': 'float',
-        'actual_yaw_deg': 'float',
-        'actual_yaw_rate_deg_s': 'float',
-        'desired_yaw_rate_deg_s': 'float',
+        'actual_yaw': 'float',
+        'actual_yaw_rate': 'float',
+        'desired_yaw_rate': 'float',
+        'forward_speed_normalized': 'float',
+        'speed_diff_normalized': 'float',
         'pid_yaw_integral': 'float',
         'pid_yaw_rate_integral': 'float',
         'pid_throttle_integral': 'float',
@@ -80,6 +84,8 @@ class RoverDifferentialStatus(metaclass=Metaclass_RoverDifferentialStatus):
 
     SLOT_TYPES = (
         rosidl_parser.definition.BasicType('uint64'),  # noqa: E501
+        rosidl_parser.definition.BasicType('float'),  # noqa: E501
+        rosidl_parser.definition.BasicType('float'),  # noqa: E501
         rosidl_parser.definition.BasicType('float'),  # noqa: E501
         rosidl_parser.definition.BasicType('float'),  # noqa: E501
         rosidl_parser.definition.BasicType('float'),  # noqa: E501
@@ -95,9 +101,11 @@ class RoverDifferentialStatus(metaclass=Metaclass_RoverDifferentialStatus):
             ', '.join(sorted(k for k in kwargs.keys() if '_' + k not in self.__slots__))
         self.timestamp = kwargs.get('timestamp', int())
         self.actual_speed = kwargs.get('actual_speed', float())
-        self.actual_yaw_deg = kwargs.get('actual_yaw_deg', float())
-        self.actual_yaw_rate_deg_s = kwargs.get('actual_yaw_rate_deg_s', float())
-        self.desired_yaw_rate_deg_s = kwargs.get('desired_yaw_rate_deg_s', float())
+        self.actual_yaw = kwargs.get('actual_yaw', float())
+        self.actual_yaw_rate = kwargs.get('actual_yaw_rate', float())
+        self.desired_yaw_rate = kwargs.get('desired_yaw_rate', float())
+        self.forward_speed_normalized = kwargs.get('forward_speed_normalized', float())
+        self.speed_diff_normalized = kwargs.get('speed_diff_normalized', float())
         self.pid_yaw_integral = kwargs.get('pid_yaw_integral', float())
         self.pid_yaw_rate_integral = kwargs.get('pid_yaw_rate_integral', float())
         self.pid_throttle_integral = kwargs.get('pid_throttle_integral', float())
@@ -135,11 +143,15 @@ class RoverDifferentialStatus(metaclass=Metaclass_RoverDifferentialStatus):
             return False
         if self.actual_speed != other.actual_speed:
             return False
-        if self.actual_yaw_deg != other.actual_yaw_deg:
+        if self.actual_yaw != other.actual_yaw:
             return False
-        if self.actual_yaw_rate_deg_s != other.actual_yaw_rate_deg_s:
+        if self.actual_yaw_rate != other.actual_yaw_rate:
             return False
-        if self.desired_yaw_rate_deg_s != other.desired_yaw_rate_deg_s:
+        if self.desired_yaw_rate != other.desired_yaw_rate:
+            return False
+        if self.forward_speed_normalized != other.forward_speed_normalized:
+            return False
+        if self.speed_diff_normalized != other.speed_diff_normalized:
             return False
         if self.pid_yaw_integral != other.pid_yaw_integral:
             return False
@@ -185,49 +197,79 @@ class RoverDifferentialStatus(metaclass=Metaclass_RoverDifferentialStatus):
         self._actual_speed = value
 
     @builtins.property
-    def actual_yaw_deg(self):
-        """Message field 'actual_yaw_deg'."""
-        return self._actual_yaw_deg
+    def actual_yaw(self):
+        """Message field 'actual_yaw'."""
+        return self._actual_yaw
 
-    @actual_yaw_deg.setter
-    def actual_yaw_deg(self, value):
+    @actual_yaw.setter
+    def actual_yaw(self, value):
         if __debug__:
             assert \
                 isinstance(value, float), \
-                "The 'actual_yaw_deg' field must be of type 'float'"
+                "The 'actual_yaw' field must be of type 'float'"
             assert not (value < -3.402823466e+38 or value > 3.402823466e+38) or math.isinf(value), \
-                "The 'actual_yaw_deg' field must be a float in [-3.402823466e+38, 3.402823466e+38]"
-        self._actual_yaw_deg = value
+                "The 'actual_yaw' field must be a float in [-3.402823466e+38, 3.402823466e+38]"
+        self._actual_yaw = value
 
     @builtins.property
-    def actual_yaw_rate_deg_s(self):
-        """Message field 'actual_yaw_rate_deg_s'."""
-        return self._actual_yaw_rate_deg_s
+    def actual_yaw_rate(self):
+        """Message field 'actual_yaw_rate'."""
+        return self._actual_yaw_rate
 
-    @actual_yaw_rate_deg_s.setter
-    def actual_yaw_rate_deg_s(self, value):
+    @actual_yaw_rate.setter
+    def actual_yaw_rate(self, value):
         if __debug__:
             assert \
                 isinstance(value, float), \
-                "The 'actual_yaw_rate_deg_s' field must be of type 'float'"
+                "The 'actual_yaw_rate' field must be of type 'float'"
             assert not (value < -3.402823466e+38 or value > 3.402823466e+38) or math.isinf(value), \
-                "The 'actual_yaw_rate_deg_s' field must be a float in [-3.402823466e+38, 3.402823466e+38]"
-        self._actual_yaw_rate_deg_s = value
+                "The 'actual_yaw_rate' field must be a float in [-3.402823466e+38, 3.402823466e+38]"
+        self._actual_yaw_rate = value
 
     @builtins.property
-    def desired_yaw_rate_deg_s(self):
-        """Message field 'desired_yaw_rate_deg_s'."""
-        return self._desired_yaw_rate_deg_s
+    def desired_yaw_rate(self):
+        """Message field 'desired_yaw_rate'."""
+        return self._desired_yaw_rate
 
-    @desired_yaw_rate_deg_s.setter
-    def desired_yaw_rate_deg_s(self, value):
+    @desired_yaw_rate.setter
+    def desired_yaw_rate(self, value):
         if __debug__:
             assert \
                 isinstance(value, float), \
-                "The 'desired_yaw_rate_deg_s' field must be of type 'float'"
+                "The 'desired_yaw_rate' field must be of type 'float'"
             assert not (value < -3.402823466e+38 or value > 3.402823466e+38) or math.isinf(value), \
-                "The 'desired_yaw_rate_deg_s' field must be a float in [-3.402823466e+38, 3.402823466e+38]"
-        self._desired_yaw_rate_deg_s = value
+                "The 'desired_yaw_rate' field must be a float in [-3.402823466e+38, 3.402823466e+38]"
+        self._desired_yaw_rate = value
+
+    @builtins.property
+    def forward_speed_normalized(self):
+        """Message field 'forward_speed_normalized'."""
+        return self._forward_speed_normalized
+
+    @forward_speed_normalized.setter
+    def forward_speed_normalized(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, float), \
+                "The 'forward_speed_normalized' field must be of type 'float'"
+            assert not (value < -3.402823466e+38 or value > 3.402823466e+38) or math.isinf(value), \
+                "The 'forward_speed_normalized' field must be a float in [-3.402823466e+38, 3.402823466e+38]"
+        self._forward_speed_normalized = value
+
+    @builtins.property
+    def speed_diff_normalized(self):
+        """Message field 'speed_diff_normalized'."""
+        return self._speed_diff_normalized
+
+    @speed_diff_normalized.setter
+    def speed_diff_normalized(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, float), \
+                "The 'speed_diff_normalized' field must be of type 'float'"
+            assert not (value < -3.402823466e+38 or value > 3.402823466e+38) or math.isinf(value), \
+                "The 'speed_diff_normalized' field must be a float in [-3.402823466e+38, 3.402823466e+38]"
+        self._speed_diff_normalized = value
 
     @builtins.property
     def pid_yaw_integral(self):

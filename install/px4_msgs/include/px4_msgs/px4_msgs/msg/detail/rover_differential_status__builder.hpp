@@ -69,15 +69,15 @@ private:
   ::px4_msgs::msg::RoverDifferentialStatus msg_;
 };
 
-class Init_RoverDifferentialStatus_desired_yaw_rate_deg_s
+class Init_RoverDifferentialStatus_speed_diff_normalized
 {
 public:
-  explicit Init_RoverDifferentialStatus_desired_yaw_rate_deg_s(::px4_msgs::msg::RoverDifferentialStatus & msg)
+  explicit Init_RoverDifferentialStatus_speed_diff_normalized(::px4_msgs::msg::RoverDifferentialStatus & msg)
   : msg_(msg)
   {}
-  Init_RoverDifferentialStatus_pid_yaw_integral desired_yaw_rate_deg_s(::px4_msgs::msg::RoverDifferentialStatus::_desired_yaw_rate_deg_s_type arg)
+  Init_RoverDifferentialStatus_pid_yaw_integral speed_diff_normalized(::px4_msgs::msg::RoverDifferentialStatus::_speed_diff_normalized_type arg)
   {
-    msg_.desired_yaw_rate_deg_s = std::move(arg);
+    msg_.speed_diff_normalized = std::move(arg);
     return Init_RoverDifferentialStatus_pid_yaw_integral(msg_);
   }
 
@@ -85,32 +85,64 @@ private:
   ::px4_msgs::msg::RoverDifferentialStatus msg_;
 };
 
-class Init_RoverDifferentialStatus_actual_yaw_rate_deg_s
+class Init_RoverDifferentialStatus_forward_speed_normalized
 {
 public:
-  explicit Init_RoverDifferentialStatus_actual_yaw_rate_deg_s(::px4_msgs::msg::RoverDifferentialStatus & msg)
+  explicit Init_RoverDifferentialStatus_forward_speed_normalized(::px4_msgs::msg::RoverDifferentialStatus & msg)
   : msg_(msg)
   {}
-  Init_RoverDifferentialStatus_desired_yaw_rate_deg_s actual_yaw_rate_deg_s(::px4_msgs::msg::RoverDifferentialStatus::_actual_yaw_rate_deg_s_type arg)
+  Init_RoverDifferentialStatus_speed_diff_normalized forward_speed_normalized(::px4_msgs::msg::RoverDifferentialStatus::_forward_speed_normalized_type arg)
   {
-    msg_.actual_yaw_rate_deg_s = std::move(arg);
-    return Init_RoverDifferentialStatus_desired_yaw_rate_deg_s(msg_);
+    msg_.forward_speed_normalized = std::move(arg);
+    return Init_RoverDifferentialStatus_speed_diff_normalized(msg_);
   }
 
 private:
   ::px4_msgs::msg::RoverDifferentialStatus msg_;
 };
 
-class Init_RoverDifferentialStatus_actual_yaw_deg
+class Init_RoverDifferentialStatus_desired_yaw_rate
 {
 public:
-  explicit Init_RoverDifferentialStatus_actual_yaw_deg(::px4_msgs::msg::RoverDifferentialStatus & msg)
+  explicit Init_RoverDifferentialStatus_desired_yaw_rate(::px4_msgs::msg::RoverDifferentialStatus & msg)
   : msg_(msg)
   {}
-  Init_RoverDifferentialStatus_actual_yaw_rate_deg_s actual_yaw_deg(::px4_msgs::msg::RoverDifferentialStatus::_actual_yaw_deg_type arg)
+  Init_RoverDifferentialStatus_forward_speed_normalized desired_yaw_rate(::px4_msgs::msg::RoverDifferentialStatus::_desired_yaw_rate_type arg)
   {
-    msg_.actual_yaw_deg = std::move(arg);
-    return Init_RoverDifferentialStatus_actual_yaw_rate_deg_s(msg_);
+    msg_.desired_yaw_rate = std::move(arg);
+    return Init_RoverDifferentialStatus_forward_speed_normalized(msg_);
+  }
+
+private:
+  ::px4_msgs::msg::RoverDifferentialStatus msg_;
+};
+
+class Init_RoverDifferentialStatus_actual_yaw_rate
+{
+public:
+  explicit Init_RoverDifferentialStatus_actual_yaw_rate(::px4_msgs::msg::RoverDifferentialStatus & msg)
+  : msg_(msg)
+  {}
+  Init_RoverDifferentialStatus_desired_yaw_rate actual_yaw_rate(::px4_msgs::msg::RoverDifferentialStatus::_actual_yaw_rate_type arg)
+  {
+    msg_.actual_yaw_rate = std::move(arg);
+    return Init_RoverDifferentialStatus_desired_yaw_rate(msg_);
+  }
+
+private:
+  ::px4_msgs::msg::RoverDifferentialStatus msg_;
+};
+
+class Init_RoverDifferentialStatus_actual_yaw
+{
+public:
+  explicit Init_RoverDifferentialStatus_actual_yaw(::px4_msgs::msg::RoverDifferentialStatus & msg)
+  : msg_(msg)
+  {}
+  Init_RoverDifferentialStatus_actual_yaw_rate actual_yaw(::px4_msgs::msg::RoverDifferentialStatus::_actual_yaw_type arg)
+  {
+    msg_.actual_yaw = std::move(arg);
+    return Init_RoverDifferentialStatus_actual_yaw_rate(msg_);
   }
 
 private:
@@ -123,10 +155,10 @@ public:
   explicit Init_RoverDifferentialStatus_actual_speed(::px4_msgs::msg::RoverDifferentialStatus & msg)
   : msg_(msg)
   {}
-  Init_RoverDifferentialStatus_actual_yaw_deg actual_speed(::px4_msgs::msg::RoverDifferentialStatus::_actual_speed_type arg)
+  Init_RoverDifferentialStatus_actual_yaw actual_speed(::px4_msgs::msg::RoverDifferentialStatus::_actual_speed_type arg)
   {
     msg_.actual_speed = std::move(arg);
-    return Init_RoverDifferentialStatus_actual_yaw_deg(msg_);
+    return Init_RoverDifferentialStatus_actual_yaw(msg_);
   }
 
 private:

@@ -68,31 +68,49 @@ bool px4_msgs__msg__rover_differential_status__convert_from_py(PyObject * _pymsg
     ros_message->actual_speed = (float)PyFloat_AS_DOUBLE(field);
     Py_DECREF(field);
   }
-  {  // actual_yaw_deg
-    PyObject * field = PyObject_GetAttrString(_pymsg, "actual_yaw_deg");
+  {  // actual_yaw
+    PyObject * field = PyObject_GetAttrString(_pymsg, "actual_yaw");
     if (!field) {
       return false;
     }
     assert(PyFloat_Check(field));
-    ros_message->actual_yaw_deg = (float)PyFloat_AS_DOUBLE(field);
+    ros_message->actual_yaw = (float)PyFloat_AS_DOUBLE(field);
     Py_DECREF(field);
   }
-  {  // actual_yaw_rate_deg_s
-    PyObject * field = PyObject_GetAttrString(_pymsg, "actual_yaw_rate_deg_s");
+  {  // actual_yaw_rate
+    PyObject * field = PyObject_GetAttrString(_pymsg, "actual_yaw_rate");
     if (!field) {
       return false;
     }
     assert(PyFloat_Check(field));
-    ros_message->actual_yaw_rate_deg_s = (float)PyFloat_AS_DOUBLE(field);
+    ros_message->actual_yaw_rate = (float)PyFloat_AS_DOUBLE(field);
     Py_DECREF(field);
   }
-  {  // desired_yaw_rate_deg_s
-    PyObject * field = PyObject_GetAttrString(_pymsg, "desired_yaw_rate_deg_s");
+  {  // desired_yaw_rate
+    PyObject * field = PyObject_GetAttrString(_pymsg, "desired_yaw_rate");
     if (!field) {
       return false;
     }
     assert(PyFloat_Check(field));
-    ros_message->desired_yaw_rate_deg_s = (float)PyFloat_AS_DOUBLE(field);
+    ros_message->desired_yaw_rate = (float)PyFloat_AS_DOUBLE(field);
+    Py_DECREF(field);
+  }
+  {  // forward_speed_normalized
+    PyObject * field = PyObject_GetAttrString(_pymsg, "forward_speed_normalized");
+    if (!field) {
+      return false;
+    }
+    assert(PyFloat_Check(field));
+    ros_message->forward_speed_normalized = (float)PyFloat_AS_DOUBLE(field);
+    Py_DECREF(field);
+  }
+  {  // speed_diff_normalized
+    PyObject * field = PyObject_GetAttrString(_pymsg, "speed_diff_normalized");
+    if (!field) {
+      return false;
+    }
+    assert(PyFloat_Check(field));
+    ros_message->speed_diff_normalized = (float)PyFloat_AS_DOUBLE(field);
     Py_DECREF(field);
   }
   {  // pid_yaw_integral
@@ -166,33 +184,55 @@ PyObject * px4_msgs__msg__rover_differential_status__convert_to_py(void * raw_ro
       }
     }
   }
-  {  // actual_yaw_deg
+  {  // actual_yaw
     PyObject * field = NULL;
-    field = PyFloat_FromDouble(ros_message->actual_yaw_deg);
+    field = PyFloat_FromDouble(ros_message->actual_yaw);
     {
-      int rc = PyObject_SetAttrString(_pymessage, "actual_yaw_deg", field);
+      int rc = PyObject_SetAttrString(_pymessage, "actual_yaw", field);
       Py_DECREF(field);
       if (rc) {
         return NULL;
       }
     }
   }
-  {  // actual_yaw_rate_deg_s
+  {  // actual_yaw_rate
     PyObject * field = NULL;
-    field = PyFloat_FromDouble(ros_message->actual_yaw_rate_deg_s);
+    field = PyFloat_FromDouble(ros_message->actual_yaw_rate);
     {
-      int rc = PyObject_SetAttrString(_pymessage, "actual_yaw_rate_deg_s", field);
+      int rc = PyObject_SetAttrString(_pymessage, "actual_yaw_rate", field);
       Py_DECREF(field);
       if (rc) {
         return NULL;
       }
     }
   }
-  {  // desired_yaw_rate_deg_s
+  {  // desired_yaw_rate
     PyObject * field = NULL;
-    field = PyFloat_FromDouble(ros_message->desired_yaw_rate_deg_s);
+    field = PyFloat_FromDouble(ros_message->desired_yaw_rate);
     {
-      int rc = PyObject_SetAttrString(_pymessage, "desired_yaw_rate_deg_s", field);
+      int rc = PyObject_SetAttrString(_pymessage, "desired_yaw_rate", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
+  {  // forward_speed_normalized
+    PyObject * field = NULL;
+    field = PyFloat_FromDouble(ros_message->forward_speed_normalized);
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "forward_speed_normalized", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
+  {  // speed_diff_normalized
+    PyObject * field = NULL;
+    field = PyFloat_FromDouble(ros_message->speed_diff_normalized);
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "speed_diff_normalized", field);
       Py_DECREF(field);
       if (rc) {
         return NULL;
