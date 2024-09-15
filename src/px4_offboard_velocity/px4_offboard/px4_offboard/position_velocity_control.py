@@ -77,12 +77,12 @@ class PositionVelocityControl(Node):
         self.takeoff_counter = 0
         self.vehicle_local_position = VehicleLocalPosition()
         self.vehicle_status = VehicleStatus()
-        self.takeoff_height = -0.5
+        self.takeoff_height = -5.0
         self.yaw = 0.0  #yaw value we send as command
         self.trueYaw = 0.0  #current yaw value of drone
         # Define PD controller parameters
-        self.Kp = 0.95
-        self.Kd = 0.3
+        self.Kp = 0.2
+        self.Kd = 0.1
         self.Ki = 0.01
         self.dt = 0.02
         # Error terms
@@ -168,21 +168,21 @@ class PositionVelocityControl(Node):
         """Publish the offboard control mode."""
         msg = OffboardControlMode()
         msg.position = True
-        msg.velocity = False
+        msg.velocity = True
         msg.acceleration = False
         msg.attitude = False
         msg.body_rate = False
         msg.timestamp = int(self.get_clock().now().nanoseconds / 1000)
         self.offboard_control_mode_publisher.publish(msg)
 
-    def publish_takeoff(self):
-        """Publish the trajectory setpoint."""
-        msg = TrajectorySetpoint()
-        msg.position = [0.0, 0.0, self.takeoff_height]
-        msg.yaw = 1.57079  # (90 degree)
-        msg.timestamp = int(self.get_clock().now().nanoseconds / 1000)
-        self.trajectory_setpoint_publisher.publish(msg)
-        self.get_logger().info(f"Taking Off!")
+    # def publish_takeoff(self):
+    #     """Publish the trajectory setpoint."""
+    #     msg = TrajectorySetpoint()
+    #     msg.position = [0.0, 0.0, self.takeoff_height]
+    #     msg.yaw = 1.57079  # (90 degree)
+    #     msg.timestamp = int(self.get_clock().now().nanoseconds / 1000)
+    #     self.trajectory_setpoint_publisher.publish(msg)
+    #     self.get_logger().info(f"Taking Off!")
 
     # This is not used for velocity control
     def publish_vehicle_command(self, command, **params) -> None:
@@ -249,7 +249,8 @@ class PositionVelocityControl(Node):
         #the desired velocity is under world frame
         desired_vel_x = self.Kp * error_x + self.Ki * self.integral_error_x + self.Kd * derivative_error_x
         desired_vel_y = self.Kp * error_y + self.Ki * self.integral_error_y + self.Kd * derivative_error_y
-        desired_vel_z = self.Kp * error_z + self.Ki * self.integral_error_z + self.Kd * derivative_error_z
+        # desired_vel_z = self.Kp * error_z + self.Ki * self.integral_error_z + self.Kd * derivative_error_z
+        desired_vel_z = 0.1 * self.Kp * error_z 
         # print("des_X", desired_vel_x, " des_Y", desired_vel_y, " des_Z", desired_vel_z, " /")
 
         # Update previous error
@@ -327,9 +328,10 @@ class PositionVelocityControl(Node):
             self.arm()
 
         if self.control_mode == 'takeoff' and self.vehicle_status.nav_state == VehicleStatus.NAVIGATION_STATE_OFFBOARD:
-            self.publish_takeoff()
+            # self.publish_takeoff()
+            self.publish_position_setpoint(0.0,0.0,self.takeoff_height)
             self.takeoff_counter += 1
-            if self.takeoff_counter > 10 and self.vehicle_local_position.z - self.takeoff_height < 0.1:
+            if self.takeoff_counter > 10: #and self.vehicle_local_position.z - self.takeoff_height < 0.1:
                 self.control_mode = 'position'
         elif self.control_mode == 'position' and self.vehicle_status.nav_state == VehicleStatus.NAVIGATION_STATE_OFFBOARD:
             if self.initial_position_point:
@@ -340,7 +342,7 @@ class PositionVelocityControl(Node):
             # vehicle_position = np.array([self.vehicle_local_position.x, self.vehicle_local_position.y, self.vehicle_local_position.z])
             # target_position_array = np.array([self.target_position.x, self.target_position.y, self.target_position.z])
             if np.linalg.norm(np.array([self.target_position.x, self.target_position.y, self.target_position.z]) - \
-                              np.array([self.vehicle_local_position.x, self.vehicle_local_position.y, self.vehicle_local_position.z])) < 0.1:
+                              np.array([self.vehicle_local_position.x, self.vehicle_local_position.y, self.vehicle_local_position.z])) < 0.2:
                 print("!!!First desired position setpoint has reached")
                 self.position_reached = True
                 self.control_mode = 'velocity'
