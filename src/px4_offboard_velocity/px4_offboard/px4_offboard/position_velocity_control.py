@@ -99,7 +99,7 @@ class PositionVelocityControl(Node):
         self.velocity_limit = 1
 
         # Define position precision
-        self.position_precision = 0.3
+        self.position_precision = 0.5
 
         #staged position waypoint reached
         self.position_reached = False
@@ -366,7 +366,7 @@ class PositionVelocityControl(Node):
 #check if the target position has reached, if not, keep publishing velocity setpoints to track target position
     def position_setpoint_track(self, target_position, local_position): 
         if np.linalg.norm(np.array([self.target_position.x, self.target_position.y, self.target_position.z]) - \
-                              np.array([local_position.x, local_position.y, local_position.z])) > self.position_precision:
+                              np.array([local_position.x, local_position.y, local_position.z])) > 0.5:
                 self.get_logger().info(f"Moving to setpoint: x={target_position.x}, y={target_position.y}, z={target_position.z}")
                 self.get_logger().info(f"Local Position {[local_position.x, local_position.y, local_position.z]}")
                 self.publish_velocity_setpoint(target_position)
@@ -410,7 +410,7 @@ class PositionVelocityControl(Node):
             # vehicle_position = np.array([self.vehicle_local_position.x, self.vehicle_local_position.y, self.vehicle_local_position.z])
             # target_position_array = np.array([self.target_position.x, self.target_position.y, self.target_position.z])
             if np.linalg.norm(np.array([self.target_position.x, self.target_position.y, self.target_position.z]) - \
-                              np.array([self.vehicle_local_position.x, self.vehicle_local_position.y, self.vehicle_local_position.z])) < self.position_precision:
+                              np.array([self.vehicle_local_position.x, self.vehicle_local_position.y, self.vehicle_local_position.z])) < 0.5:
                 print("!!!First desired position setpoint has reached")
                 self.position_reached = True
                 self.control_mode = 'velocity'
