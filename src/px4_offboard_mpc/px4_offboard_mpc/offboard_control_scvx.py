@@ -5,7 +5,7 @@ from px4_msgs.msg import OffboardControlMode, TrajectorySetpoint, VehicleCommand
 import numpy as np
 import cvxpy as cp
 import time
-from px4_offboard_mpc.scvx_class_plot import Scvx
+from src.px4_offboard_mpc.px4_offboard_mpc.scvx_class import Scvx
 
 
 class OffboardControlScvx(Node):

@@ -225,12 +225,17 @@ class PositionVelocityControl(Node):
         self.get_logger().info(f"Local Position {[self.vehicle_local_position.x, self.vehicle_local_position.y, self.vehicle_local_position.z]}")
 
     def velocity_position_controller(self, target_position):
+        "Calculate the velocity at each point given target position"
+        #use vehicle local position from FC
         velocity_yaw = Twist()
-        #You can only control the angular rate at z direction - yaw. Thi is partial attitude control. 
+        #You can only control the angular rate at z direction - yaw. This is partially attitude control. 
         velocity_yaw.angular.x = 0.0
         velocity_yaw.angular.y = 0.0
         velocity_yaw.angular.z = 0.0
 
+        #change the vehicle body coordinates to the vicon reference coordinates
+        # self.get_logger().info(f"Moving to setpoint: x={target_position.x}, y={target_position.y}, z={target_position.z}")
+        # self.get_logger().info(f"Local Position {[self.vehicle_local_position.x, self.vehicle_local_position.y, self.vehicle_local_position.z]}")
         #implementing PID controller
         error_x = target_position.x - self.vehicle_local_position.x
         error_y = target_position.y - self.vehicle_local_position.y
@@ -248,9 +253,12 @@ class PositionVelocityControl(Node):
         
         #the desired velocity is under world frame
         desired_vel_x = self.Kp * error_x + self.Ki * self.integral_error_x + self.Kd * derivative_error_x
-        desired_vel_y = self.Kp * error_y + self.Ki * self.integral_error_y + self.Kd * derivative_error_y
+        #desired_vel_y = self.Kp * error_y + self.Ki * self.integral_error_y + self.Kd * derivative_error_y
+        desired_vel_y = self.Kp * error_y + self.Ki * self.integral_error_y
+        #desired_vel_y = self.Kp * error_y
         # desired_vel_z = self.Kp * error_z + self.Ki * self.integral_error_z + self.Kd * derivative_error_z
-        desired_vel_z = 0.1 * self.Kp * error_z 
+        desired_vel_z = self.Kp * error_z + self.Ki * self.integral_error_z 
+        # desired_vel_z = self.Kp * error_z
         # print("des_X", desired_vel_x, " des_Y", desired_vel_y, " des_Z", desired_vel_z, " /")
 
         # Update previous error
@@ -258,12 +266,13 @@ class PositionVelocityControl(Node):
         self.prev_error_y = error_y
         self.prev_error_z = error_z
 
+        self.get_logger().info(f"Desired velocity setpoints {[desired_vel_x, desired_vel_y, desired_vel_z]}")
         if abs(desired_vel_x) > self.velocity_limit:
-            velocity_yaw.linear.x = np.sign(desired_vel_z) * self.velocity_limit
+            velocity_yaw.linear.x = np.sign(desired_vel_x) * self.velocity_limit
         elif abs(desired_vel_x) <= self.velocity_limit:
             velocity_yaw.linear.x = desired_vel_x
         if abs(desired_vel_y) > self.velocity_limit:
-            velocity_yaw.linear.y = np.sign(desired_vel_z) * self.velocity_limit
+            velocity_yaw.linear.y = np.sign(desired_vel_y) * self.velocity_limit
         elif abs(desired_vel_y) <= self.velocity_limit:
             velocity_yaw.linear.y = desired_vel_y
         if abs(desired_vel_z) > self.velocity_limit:
@@ -276,6 +285,7 @@ class PositionVelocityControl(Node):
         return velocity_yaw
     
     def publish_velocity_setpoint(self, target_position):
+        "Take current target position and publish the velocity setpoints"
         msg = OffboardControlMode()
         msg.position = False
         msg.velocity = True
@@ -296,8 +306,10 @@ class PositionVelocityControl(Node):
         # Create and publish TrajectorySetpoint message with NaN values for position and acceleration
         trajectory_msg = TrajectorySetpoint()
         trajectory_msg.timestamp = int(Clock().now().nanoseconds / 1000)
-        trajectory_msg.velocity[0] = velocity_world_x
-        trajectory_msg.velocity[1] = velocity_world_y
+        # trajectory_msg.velocity[0] = velocity_world_x
+        # trajectory_msg.velocity[1] = velocity_world_y
+        trajectory_msg.velocity[0] = velocity_setpoints.linear.x
+        trajectory_msg.velocity[1] = velocity_setpoints.linear.y
         trajectory_msg.velocity[2] = velocity_setpoints.linear.z
         trajectory_msg.position[0] = float('nan')
         trajectory_msg.position[1] = float('nan')
@@ -310,9 +322,10 @@ class PositionVelocityControl(Node):
         self.trajectory_setpoint_publisher.publish(trajectory_msg)
         self.get_logger().info(f"Publishing velocity setpoints {[velocity_setpoints.linear.x, velocity_setpoints.linear.y, velocity_setpoints.linear.z]}")
 
-    def position_setpoint_track(self, target_position, local_position):
+#check if the target position has reached, if not, keep publishing velocity setpoints to track target position
+    def position_setpoint_track(self, target_position, local_position): 
         if np.linalg.norm(np.array([self.target_position.x, self.target_position.y, self.target_position.z]) - \
-                              np.array([local_position.x, local_position.y, local_position.z])) > 0.1:
+                              np.array([local_position.x, local_position.y, local_position.z])) > 0.3:
                 self.get_logger().info(f"Moving to setpoint: x={target_position.x}, y={target_position.y}, z={target_position.z}")
                 self.get_logger().info(f"Local Position {[local_position.x, local_position.y, local_position.z]}")
                 self.publish_velocity_setpoint(target_position)
@@ -342,7 +355,7 @@ class PositionVelocityControl(Node):
             # vehicle_position = np.array([self.vehicle_local_position.x, self.vehicle_local_position.y, self.vehicle_local_position.z])
             # target_position_array = np.array([self.target_position.x, self.target_position.y, self.target_position.z])
             if np.linalg.norm(np.array([self.target_position.x, self.target_position.y, self.target_position.z]) - \
-                              np.array([self.vehicle_local_position.x, self.vehicle_local_position.y, self.vehicle_local_position.z])) < 0.2:
+                              np.array([self.vehicle_local_position.x, self.vehicle_local_position.y, self.vehicle_local_position.z])) < 0.5:
                 print("!!!First desired position setpoint has reached")
                 self.position_reached = True
                 self.control_mode = 'velocity'
