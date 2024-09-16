@@ -255,10 +255,11 @@ class PositionVelocityControl(Node):
         
         #the desired velocity is under world frame
         desired_vel_x = self.Kp * error_x + self.Ki * self.integral_error_x + self.Kd * derivative_error_x
+        #desired_vel_y = self.Kp * error_y + self.Ki * self.integral_error_y + self.Kd * derivative_error_y
         desired_vel_y = self.Kp * error_y + self.Ki * self.integral_error_y
+        desired_vel_z = self.Kp * error_z + self.Ki * self.integral_error_z 
         # desired_vel_z = self.Kp * error_z + self.Ki * self.integral_error_z 
         # desired_vel_y = self.Kp * error_y + self.Ki * self.integral_error_y + self.Kd * derivative_error_y
-        desired_vel_z = self.Kp * error_z + self.Ki * self.integral_error_z 
         # desired_vel_y = self.Kp * error_y
         # desired_vel_z = self.Kp * error_z
         # print("des_X", desired_vel_x, " des_Y", desired_vel_y, " des_Z", desired_vel_z, " /")
