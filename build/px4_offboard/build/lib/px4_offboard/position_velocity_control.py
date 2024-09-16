@@ -25,8 +25,8 @@ class Point:
 class Setpoint:
     points: List[Point]
 
-    def __init__(self, a: Point, b: Point, c: Point, d: Point, e: Point, f: Point):
-        self.points = [a, b, c, d, e, f]
+    def __init__(self, a: Point, b: Point, c: Point, d: Point, e: Point, f: Point, g: Point):
+        self.points = [a, b, c, d, e, f, g]
 
     def pop_point(self, index: int) -> Optional[Point]:
         if 0 <= index < len(self.points):
@@ -98,6 +98,9 @@ class PositionVelocityControl(Node):
         # Define velocity cap limit
         self.velocity_limit = 1
 
+        # Define position precision
+        self.position_precision = 0.3
+
         #staged position waypoint reached
         self.position_reached = False
         self.position_control_mode = True
@@ -109,13 +112,17 @@ class PositionVelocityControl(Node):
         # Create a timer to publish control commands
         self.timer = self.create_timer(0.02, self.timer_callback)
 
+        #The Y, Z is flipped from the body frame to the world(vicon) frame
+        # eg. point(3,-3,-5) is (3,3,5) in the world frame
+        # The setpoints given here is in the body frame 
         self.setpoints = Setpoint(
             a=Point(0.0, 0.0, -5.0),
             b=Point(3.0, -3.0, -5.0),
             c=Point(-3.0, -3.0, -5.0),
             d=Point(-3.0, 3.0, -5.0),
             e=Point(3.0, 3.0, -5.0),
-            f=Point(3.0, -3.0, -5.0)
+            f=Point(3.0, -3.0, -5.0),
+            g=Point(0.0, 0.0, -5.0),
         )
 
         self.target_position = Point(0.0,0.0,-5.0)
@@ -228,6 +235,7 @@ class PositionVelocityControl(Node):
 
     def velocity_position_controller(self, target_position):
         "Calculate the velocity at each point given target position"
+        "Implement PID controller for X direction and PI controller for the Y, Z direction."
         #use vehicle local position from FC
         velocity_yaw = Twist()
         #You can only control the angular rate at z direction - yaw. This is partially attitude control. 
@@ -358,7 +366,7 @@ class PositionVelocityControl(Node):
 #check if the target position has reached, if not, keep publishing velocity setpoints to track target position
     def position_setpoint_track(self, target_position, local_position): 
         if np.linalg.norm(np.array([self.target_position.x, self.target_position.y, self.target_position.z]) - \
-                              np.array([local_position.x, local_position.y, local_position.z])) > 0.5:
+                              np.array([local_position.x, local_position.y, local_position.z])) > self.position_precision:
                 self.get_logger().info(f"Moving to setpoint: x={target_position.x}, y={target_position.y}, z={target_position.z}")
                 self.get_logger().info(f"Local Position {[local_position.x, local_position.y, local_position.z]}")
                 self.publish_velocity_setpoint(target_position)
@@ -402,7 +410,7 @@ class PositionVelocityControl(Node):
             # vehicle_position = np.array([self.vehicle_local_position.x, self.vehicle_local_position.y, self.vehicle_local_position.z])
             # target_position_array = np.array([self.target_position.x, self.target_position.y, self.target_position.z])
             if np.linalg.norm(np.array([self.target_position.x, self.target_position.y, self.target_position.z]) - \
-                              np.array([self.vehicle_local_position.x, self.vehicle_local_position.y, self.vehicle_local_position.z])) < 0.5:
+                              np.array([self.vehicle_local_position.x, self.vehicle_local_position.y, self.vehicle_local_position.z])) < self.position_precision:
                 print("!!!First desired position setpoint has reached")
                 self.position_reached = True
                 self.control_mode = 'velocity'
