@@ -75,6 +75,7 @@ class PositionVelocityControl(Node):
         # Initialize variables
         self.offboard_setpoint_counter = 0
         self.takeoff_counter = 0
+        self.position_reached_counter = 0
         self.vehicle_local_position = VehicleLocalPosition()
         self.vehicle_status = VehicleStatus()
         self.takeoff_height = -5.0
@@ -82,8 +83,9 @@ class PositionVelocityControl(Node):
         self.trueYaw = 0.0  #current yaw value of drone
         # Define PD controller parameters
         self.Kp = 0.2
-        self.Kd = 0.1
-        self.Ki = 0.01
+        self.Ki = 0.03
+        self.Kd = 0.03
+
         self.dt = 0.02
         # Error terms
         self.prev_error_x = 0.0
@@ -248,16 +250,16 @@ class PositionVelocityControl(Node):
 
         # derivative error
         derivative_error_x = (error_x - self.prev_error_x) / self.dt
-        derivative_error_y = (error_x - self.prev_error_y) / self.dt
-        derivative_error_z = (error_x - self.prev_error_z) / self.dt
+        derivative_error_y = (error_x + self.prev_error_y) / self.dt
+        derivative_error_z = (error_x + self.prev_error_z) / self.dt
         
         #the desired velocity is under world frame
         desired_vel_x = self.Kp * error_x + self.Ki * self.integral_error_x + self.Kd * derivative_error_x
-        #desired_vel_y = self.Kp * error_y + self.Ki * self.integral_error_y + self.Kd * derivative_error_y
         desired_vel_y = self.Kp * error_y + self.Ki * self.integral_error_y
-        #desired_vel_y = self.Kp * error_y
-        # desired_vel_z = self.Kp * error_z + self.Ki * self.integral_error_z + self.Kd * derivative_error_z
+        # desired_vel_z = self.Kp * error_z + self.Ki * self.integral_error_z 
+        # desired_vel_y = self.Kp * error_y + self.Ki * self.integral_error_y + self.Kd * derivative_error_y
         desired_vel_z = self.Kp * error_z + self.Ki * self.integral_error_z 
+        # desired_vel_y = self.Kp * error_y
         # desired_vel_z = self.Kp * error_z
         # print("des_X", desired_vel_x, " des_Y", desired_vel_y, " des_Z", desired_vel_z, " /")
 
@@ -322,17 +324,61 @@ class PositionVelocityControl(Node):
         self.trajectory_setpoint_publisher.publish(trajectory_msg)
         self.get_logger().info(f"Publishing velocity setpoints {[velocity_setpoints.linear.x, velocity_setpoints.linear.y, velocity_setpoints.linear.z]}")
 
+    def direct_publish_velocity_setpoint(self, velocity_x, velocity_y, velocity_z):
+            "Directly publish the velocity setpoints"
+            msg = OffboardControlMode()
+            msg.position = False
+            msg.velocity = True
+            msg.acceleration = False
+            msg.attitude = False
+            msg.body_rate = False
+            msg.timestamp = int(self.get_clock().now().nanoseconds / 1000)
+            self.offboard_control_mode_publisher.publish(msg)
+
+            # Create and publish TrajectorySetpoint message with NaN values for position and acceleration
+            trajectory_msg = TrajectorySetpoint()
+            trajectory_msg.timestamp = int(Clock().now().nanoseconds / 1000)
+            # trajectory_msg.velocity[0] = velocity_world_x
+            # trajectory_msg.velocity[1] = velocity_world_y
+            trajectory_msg.velocity[0] = velocity_x
+            trajectory_msg.velocity[1] = velocity_y
+            trajectory_msg.velocity[2] = velocity_z
+            trajectory_msg.position[0] = float('nan')
+            trajectory_msg.position[1] = float('nan')
+            trajectory_msg.position[2] = float('nan')
+            trajectory_msg.acceleration[0] = float('nan')
+            trajectory_msg.acceleration[1] = float('nan')
+            trajectory_msg.acceleration[2] = float('nan')
+            trajectory_msg.yaw = float('nan')
+            trajectory_msg.yawspeed = self.yaw #0 in this case
+            self.trajectory_setpoint_publisher.publish(trajectory_msg)
+            self.get_logger().info(f"Publishing velocity setpoints {[velocity_x, velocity_y, velocity_z]}")
+
 #check if the target position has reached, if not, keep publishing velocity setpoints to track target position
     def position_setpoint_track(self, target_position, local_position): 
         if np.linalg.norm(np.array([self.target_position.x, self.target_position.y, self.target_position.z]) - \
-                              np.array([local_position.x, local_position.y, local_position.z])) > 0.3:
+                              np.array([local_position.x, local_position.y, local_position.z])) > 0.5:
                 self.get_logger().info(f"Moving to setpoint: x={target_position.x}, y={target_position.y}, z={target_position.z}")
                 self.get_logger().info(f"Local Position {[local_position.x, local_position.y, local_position.z]}")
                 self.publish_velocity_setpoint(target_position)
                 self.get_logger().info(f"Next: Local Position {[local_position.x, local_position.y, local_position.z]}")
         else:
-            self.get_logger().info(f"Achieved!! setpoint: x={target_position.x}, y={target_position.y}, z={target_position.z}")
-            self.position_reached = True
+            if self.position_reached_counter < 100:
+                self.position_reached_counter += 1
+                self.get_logger().info(f"Achieved!! setpoint: x={target_position.x}, y={target_position.y}, z={target_position.z}")
+                self.direct_publish_velocity_setpoint(0.0,0.0,0.0)
+                print(self.position_reached_counter)
+                print(self.position_reached)
+            if self.position_reached_counter == 100:
+                self.position_reached = True
+                self.position_reached_counter = 0
+                # Initialize PID Error terms
+                self.prev_error_x = 0.0
+                self.prev_error_y = 0.0
+                self.prev_error_z = 0.0
+                self.integral_error_x = 0.0
+                self.integral_error_y = 0.0
+                self.integral_error_z = 0.0
 
     def timer_callback(self) -> None:
         """Callback function for the timer."""

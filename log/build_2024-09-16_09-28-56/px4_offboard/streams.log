@@ -1,0 +1,41 @@
+[0.536s] Invoking command in '/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/src/px4_offboard_velocity/px4_offboard': AMENT_PREFIX_PATH=/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_msgs:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/lib/python3.10/site-packages:/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../../build/px4_offboard build --build-base /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard/build install --record /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard/install.log --single-version-externally-managed install_data
+[0.689s] running egg_info
+[0.699s] writing ../../../build/px4_offboard/px4_offboard.egg-info/PKG-INFO
+[0.700s] writing dependency_links to ../../../build/px4_offboard/px4_offboard.egg-info/dependency_links.txt
+[0.700s] writing entry points to ../../../build/px4_offboard/px4_offboard.egg-info/entry_points.txt
+[0.700s] writing requirements to ../../../build/px4_offboard/px4_offboard.egg-info/requires.txt
+[0.700s] writing top-level names to ../../../build/px4_offboard/px4_offboard.egg-info/top_level.txt
+[0.720s] reading manifest file '../../../build/px4_offboard/px4_offboard.egg-info/SOURCES.txt'
+[0.720s] adding license file 'LICENSE'
+[0.720s] writing manifest file '../../../build/px4_offboard/px4_offboard.egg-info/SOURCES.txt'
+[0.721s] running build
+[0.721s] running build_py
+[0.721s] copying px4_offboard/position_velocity_control.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard/build/lib/px4_offboard
+[0.721s] copying px4_offboard/processes.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard/build/lib/px4_offboard
+[0.721s] copying px4_offboard/visualizer.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard/build/lib/px4_offboard
+[0.721s] copying px4_offboard/temp.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard/build/lib/px4_offboard
+[0.721s] copying px4_offboard/velocity_control.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard/build/lib/px4_offboard
+[0.721s] copying px4_offboard/__init__.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard/build/lib/px4_offboard
+[0.721s] copying px4_offboard/control.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard/build/lib/px4_offboard
+[0.721s] running install
+[0.724s] running install_lib
+[0.734s] copying /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard/build/lib/px4_offboard/position_velocity_control.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/lib/python3.10/site-packages/px4_offboard
+[0.734s] byte-compiling /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/lib/python3.10/site-packages/px4_offboard/position_velocity_control.py to position_velocity_control.cpython-310.pyc
+[0.736s] running install_data
+[0.736s] copying resource/px4_offboard -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/share/ament_index/resource_index/packages
+[0.736s] copying resource/visualize.rviz -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/share/ament_index/resource_index/packages
+[0.736s] copying package.xml -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/share/px4_offboard
+[0.736s] copying launch/offboard_velocity_control.launch.py -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/share/px4_offboard
+[0.736s] copying resource/visualize.rviz -> /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/share/px4_offboard
+[0.736s] running install_egg_info
+[0.748s] removing '/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/lib/python3.10/site-packages/px4_offboard-0.0.0-py3.10.egg-info' (and everything under it)
+[0.748s] Copying ../../../build/px4_offboard/px4_offboard.egg-info to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/lib/python3.10/site-packages/px4_offboard-0.0.0-py3.10.egg-info
+[0.748s] running install_scripts
+[0.847s] Installing control script to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/lib/px4_offboard
+[0.847s] Installing offboard_control script to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/lib/px4_offboard
+[0.847s] Installing position_velocity script to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/lib/px4_offboard
+[0.847s] Installing processes script to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/lib/px4_offboard
+[0.847s] Installing velocity_control script to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/lib/px4_offboard
+[0.847s] Installing visualizer script to /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/lib/px4_offboard
+[0.848s] writing list of installed files to '/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard/install.log'
+[0.862s] Invoked command in '/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/src/px4_offboard_velocity/px4_offboard' returned '0': AMENT_PREFIX_PATH=/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_msgs:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_offboard/lib/python3.10/site-packages:/home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/install/px4_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../../build/px4_offboard build --build-base /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard/build install --record /home/mist/Documents/projects/DroneProject/ws_px4_ros2_controlAlgorithm/build/px4_offboard/install.log --single-version-externally-managed install_data
